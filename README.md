@@ -8,7 +8,10 @@
 
 A native macOS application for system monitoring, disk analysis, and cleanup. Built with SwiftUI for macOS 14+.
 
-<img width="1374" height="908" alt="image" src="https://github.com/user-attachments/assets/3d40f56a-cbb0-473d-bd96-1b6f6ebcb887" />
+
+
+https://github.com/user-attachments/assets/30fbedeb-1083-4c42-beac-9de65b2d9c6c
+
 
 ## Features
 
