@@ -63,7 +63,7 @@ struct MenuBarView: View {
             }
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("System health")
+                Text(String(localized: "menubar.systemHealth"))
                     .font(.dodoSubheadline)
                     .foregroundColor(.dodoTextPrimary)
 
@@ -83,7 +83,7 @@ struct MenuBarView: View {
         VStack(spacing: 12) {
             MetricRow(
                 icon: "cpu",
-                label: "CPU",
+                label: String(localized: "dashboard.cpu"),
                 value: cpuUsage.formattedPercentInt,
                 progress: cpuUsage / 100,
                 color: colorForUsage(cpuUsage)
@@ -91,7 +91,7 @@ struct MenuBarView: View {
 
             MetricRow(
                 icon: "memorychip",
-                label: "Memory",
+                label: String(localized: "dashboard.memory"),
                 value: memoryUsage.formattedPercentInt,
                 progress: memoryUsage / 100,
                 color: colorForUsage(memoryUsage)
@@ -99,7 +99,7 @@ struct MenuBarView: View {
 
             MetricRow(
                 icon: "internaldrive",
-                label: "Disk",
+                label: String(localized: "dashboard.disk"),
                 value: diskUsage.formattedPercentInt,
                 progress: diskUsage / 100,
                 color: colorForUsage(diskUsage),
@@ -126,7 +126,7 @@ struct MenuBarView: View {
                             .foregroundColor(.dodoTextPrimary)
                             .monospacedDigit()
 
-                        Text(battery.status == "Charging" ? "Charging" : battery.timeLeft)
+                        Text(battery.status == "Charging" ? String(localized: "menubar.charging") : battery.timeLeft)
                             .font(.system(size: 11))
                             .foregroundColor(.dodoTextTertiary)
                     }
@@ -148,7 +148,7 @@ struct MenuBarView: View {
                             .foregroundColor(.dodoTextPrimary)
                             .monospacedDigit()
 
-                        Text("CPU")
+                        Text(String(localized: "dashboard.cpu"))
                             .font(.system(size: 11))
                             .foregroundColor(.dodoTextTertiary)
                     }
@@ -200,7 +200,7 @@ struct MenuBarView: View {
             HStack(spacing: 12) {
                 QuickActionButton(
                     icon: isQuickCleaning ? "hourglass" : "trash",
-                    title: isQuickCleaning ? "Cleaning..." : "Quick clean",
+                    title: isQuickCleaning ? String(localized: "menubar.cleaning") : String(localized: "menubar.quickClean"),
                     isLoading: isQuickCleaning,
                     action: {
                         Task {
@@ -212,7 +212,7 @@ struct MenuBarView: View {
 
                 QuickActionButton(
                     icon: "chart.pie",
-                    title: "Analyze",
+                    title: String(localized: "menubar.analyze"),
                     action: {
                         Task {
                             await dodoService.analyzer.scanHome()
@@ -255,9 +255,9 @@ struct MenuBarView: View {
         if sizeBeforeClean > 0 {
             await dodoService.cleaner.cleanSelectedItems()
             let cleaned = dodoService.cleaner.lastCleanedSize
-            quickCleanResult = "Freed \(cleaned.formattedBytes)"
+            quickCleanResult = String(format: String(localized: "menubar.freed"), cleaned.formattedBytes)
         } else {
-            quickCleanResult = "System is clean"
+            quickCleanResult = String(localized: "menubar.systemClean")
         }
 
         isQuickCleaning = false
@@ -277,7 +277,7 @@ struct MenuBarView: View {
             } label: {
                 HStack {
                     Image(systemName: "macwindow")
-                    Text("Open DodoTidy")
+                    Text(String(localized: "menubar.openApp"))
                     Spacer()
                 }
                 .padding(.horizontal, 16)
@@ -295,7 +295,7 @@ struct MenuBarView: View {
             } label: {
                 HStack {
                     Image(systemName: "power")
-                    Text("Quit")
+                    Text(String(localized: "menubar.quit"))
                     Spacer()
                 }
                 .padding(.horizontal, 16)

@@ -26,6 +26,14 @@ struct AppsView: View {
         case name = "Name"
         case size = "Size"
         case lastUsed = "Last used"
+
+        var localizedName: String {
+            switch self {
+            case .name: return String(localized: "apps.sortByName")
+            case .size: return String(localized: "apps.sortBySize")
+            case .lastUsed: return String(localized: "apps.sortByLastUsed")
+            }
+        }
     }
 
     var body: some View {
@@ -39,7 +47,7 @@ struct AppsView: View {
             }
         }
         .navigationTitle("")
-        .searchable(text: $searchText, prompt: "Search apps")
+        .searchable(text: $searchText, prompt: String(localized: "apps.searchApps"))
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button {
@@ -47,16 +55,16 @@ struct AppsView: View {
                         await loadApps()
                     }
                 } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise")
+                    Label(String(localized: "common.refresh"), systemImage: "arrow.clockwise")
                 }
-                .help("Refresh app list")
+                .help(String(localized: "common.refresh"))
                 .disabled(isLoading)
             }
 
             ToolbarItem(placement: .automatic) {
-                Picker("Sort by", selection: $sortOrder) {
+                Picker(String(localized: "apps.sortBy"), selection: $sortOrder) {
                     ForEach(AppSortOrder.allCases, id: \.self) { order in
-                        Text(order.rawValue).tag(order)
+                        Text(order.localizedName).tag(order)
                     }
                 }
                 .pickerStyle(.menu)
@@ -68,29 +76,29 @@ struct AppsView: View {
                 await loadApps()
             }
         }
-        .alert("Uninstall application", isPresented: $showDeleteConfirmation) {
-            Button("Cancel", role: .cancel) {
+        .alert(String(localized: "apps.uninstallTitle"), isPresented: $showDeleteConfirmation) {
+            Button(String(localized: "common.cancel"), role: .cancel) {
                 appToDelete = nil
             }
-            Button("Move to Trash", role: .destructive) {
+            Button(String(localized: "apps.moveToTrash"), role: .destructive) {
                 if let app = appToDelete {
                     deleteApp(app)
                 }
             }
         } message: {
             if let app = appToDelete {
-                Text("Are you sure you want to uninstall \"\(app.name)\"?\n\nThis will move the application (\(app.size.formattedBytes)) to Trash.")
+                Text(String(format: String(localized: "apps.confirmUninstall"), app.name, app.size.formattedBytes))
             }
         }
-        .alert("Application uninstalled", isPresented: $showDeleteSuccess) {
-            Button("OK", role: .cancel) { }
+        .alert(String(localized: "apps.appUninstalled"), isPresented: $showDeleteSuccess) {
+            Button(String(localized: "common.ok"), role: .cancel) { }
         } message: {
-            Text("\"\(deletedAppName)\" has been moved to Trash.\n\nYou can restore it from Trash if needed.")
+            Text(String(format: String(localized: "apps.uninstalledMessage"), deletedAppName))
         }
-        .alert("Error", isPresented: $showError) {
-            Button("OK", role: .cancel) { }
+        .alert(String(localized: "common.error"), isPresented: $showError) {
+            Button(String(localized: "common.ok"), role: .cancel) { }
         } message: {
-            Text(errorMessage ?? "An unknown error occurred.")
+            Text(errorMessage ?? String(localized: "common.somethingWrong"))
         }
     }
 
@@ -132,11 +140,11 @@ struct AppsView: View {
             }
 
             VStack(spacing: 8) {
-                Text("Loading applications...")
+                Text(String(localized: "apps.loading"))
                     .font(.dodoBody)
                     .foregroundColor(.dodoTextSecondary)
 
-                Text("Scanning /Applications")
+                Text(String(localized: "apps.scanning"))
                     .font(.dodoCaption)
                     .foregroundColor(.dodoTextTertiary)
             }
@@ -157,7 +165,7 @@ struct AppsView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.dodoTextTertiary)
 
-            Text(searchText.isEmpty ? "No applications found" : "No matching applications")
+            Text(searchText.isEmpty ? String(localized: "apps.noAppsFound") : String(localized: "apps.noMatchingApps"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
@@ -165,7 +173,7 @@ struct AppsView: View {
                 Button {
                     searchText = ""
                 } label: {
-                    Text("Clear search")
+                    Text(String(localized: "apps.clearSearch"))
                 }
                 .buttonStyle(.dodoSecondary)
             }
@@ -215,7 +223,7 @@ struct AppsView: View {
     private var statsBar: some View {
         HStack(spacing: DodoTidyDimensions.spacingLarge) {
             StatItem(
-                label: "Total apps",
+                label: String(localized: "apps.totalApps"),
                 value: "\(apps.count)"
             )
 
@@ -223,7 +231,7 @@ struct AppsView: View {
                 .frame(height: 30)
 
             StatItem(
-                label: "Total size",
+                label: String(localized: "apps.totalSize"),
                 value: totalSize.formattedBytes
             )
 
@@ -426,7 +434,7 @@ struct AppRow: View {
                         }
                         .buttonStyle(.plain)
                         .foregroundColor(.dodoTextTertiary)
-                        .help("Show in Finder")
+                        .help(String(localized: "apps.showInFinder"))
 
                         Button {
                             NSWorkspace.shared.open(URL(fileURLWithPath: app.path))
@@ -436,7 +444,7 @@ struct AppRow: View {
                         }
                         .buttonStyle(.plain)
                         .foregroundColor(.dodoTextTertiary)
-                        .help("Open app")
+                        .help(String(localized: "apps.openApp"))
 
                         Button(action: onDelete) {
                             Image(systemName: "trash")
@@ -444,7 +452,7 @@ struct AppRow: View {
                         }
                         .buttonStyle(.plain)
                         .foregroundColor(.dodoDanger)
-                        .help("Uninstall app")
+                        .help(String(localized: "apps.uninstall"))
                     }
                 }
             }

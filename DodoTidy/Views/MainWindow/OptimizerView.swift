@@ -49,11 +49,11 @@ struct OptimizerView: View {
                 await dodoService.optimizer.analyzeSystem()
             }
         }
-        .alert("Confirm optimization", isPresented: $showConfirmation) {
-            Button("Cancel", role: .cancel) {
+        .alert(String(localized: "optimizer.confirmTitle"), isPresented: $showConfirmation) {
+            Button(String(localized: "common.cancel"), role: .cancel) {
                 taskToConfirm = nil
             }
-            Button("Run") {
+            Button(String(localized: "optimizer.run")) {
                 if let task = taskToConfirm {
                     Task {
                         await dodoService.optimizer.runTask(task.id)
@@ -63,13 +63,13 @@ struct OptimizerView: View {
                             case .completed:
                                 ToastManager.shared.show(ToastData(
                                     type: .success,
-                                    title: "Optimization complete",
+                                    title: String(localized: "optimizer.optimizationComplete"),
                                     message: updatedTask.benefit
                                 ))
                             case .failed(let error):
                                 ToastManager.shared.show(ToastData(
                                     type: .error,
-                                    title: "Optimization failed",
+                                    title: String(localized: "optimizer.optimizationFailed"),
                                     message: error
                                 ))
                             default:
@@ -82,12 +82,12 @@ struct OptimizerView: View {
             }
         } message: {
             if let task = taskToConfirm {
-                Text("Are you sure you want to run \"\(task.name)\"?\n\n\(task.description)\n\nThis action will execute a system command.")
+                Text(String(format: String(localized: "optimizer.confirmMessage"), task.name, task.description))
             }
         }
-        .alert("Run all optimizations?", isPresented: $showRunAllConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Run all") {
+        .alert(String(localized: "optimizer.confirmAllTitle"), isPresented: $showRunAllConfirmation) {
+            Button(String(localized: "common.cancel"), role: .cancel) { }
+            Button(String(localized: "optimizer.runAll")) {
                 Task {
                     let beforeCompleted = dodoService.optimizer.completedTaskCount
                     let beforeFailed = dodoService.optimizer.failedTaskCount
@@ -98,20 +98,20 @@ struct OptimizerView: View {
                     if newFailed > 0 {
                         ToastManager.shared.show(ToastData(
                             type: .warning,
-                            title: "Optimizations completed",
-                            message: "\(newCompleted) succeeded, \(newFailed) failed"
+                            title: String(localized: "optimizer.optimizationsCompleted"),
+                            message: String(format: String(localized: "optimizer.completedWithFailures"), newCompleted, newFailed)
                         ))
                     } else {
                         ToastManager.shared.show(ToastData(
                             type: .success,
-                            title: "All optimizations complete",
-                            message: "\(newCompleted) tasks completed successfully"
+                            title: String(localized: "optimizer.allComplete"),
+                            message: String(format: String(localized: "optimizer.tasksCompleted"), newCompleted)
                         ))
                     }
                 }
             }
         } message: {
-            Text("This will run \(dodoService.optimizer.pendingTaskCount) optimization tasks:\n\n\(pendingTaskNames)\n\nAre you sure you want to continue?")
+            Text(String(format: String(localized: "optimizer.confirmAllMessage"), dodoService.optimizer.pendingTaskCount, pendingTaskNames))
         }
     }
 
@@ -308,7 +308,7 @@ struct OptimizerView: View {
                 } label: {
                     HStack(spacing: 6) {
                         Image(systemName: "bolt.fill")
-                        Text("Run all")
+                        Text(String(localized: "optimizer.runAll"))
                     }
                 }
                 .buttonStyle(.dodoPrimary)
@@ -391,19 +391,19 @@ struct OptimizationTaskCard: View {
         switch task.status {
         case .pending:
             Button(action: onRun) {
-                Text("Run")
+                Text(String(localized: "optimizer.run"))
             }
             .buttonStyle(.dodoSecondary)
 
         case .running:
-            Text("Running...")
+            Text(String(localized: "optimizer.running"))
                 .font(.dodoCaption)
                 .foregroundColor(.dodoTextSecondary)
 
         case .completed:
             HStack(spacing: 4) {
                 Image(systemName: "checkmark.circle.fill")
-                Text("Done")
+                Text(String(localized: "optimizer.done"))
             }
             .font(.dodoCaption)
             .foregroundColor(.dodoSuccess)
@@ -413,7 +413,7 @@ struct OptimizationTaskCard: View {
                 VStack(alignment: .trailing, spacing: 2) {
                     HStack(spacing: 4) {
                         Image(systemName: "exclamationmark.circle.fill")
-                        Text("Failed")
+                        Text(String(localized: "optimizer.failedStatus"))
                     }
                     .font(.dodoCaption)
                     .foregroundColor(.dodoDanger)
@@ -428,7 +428,7 @@ struct OptimizationTaskCard: View {
                 Button(action: onRun) {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.clockwise")
-                        Text("Retry")
+                        Text(String(localized: "optimizer.retry"))
                     }
                 }
                 .buttonStyle(.dodoSecondary)

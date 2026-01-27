@@ -74,6 +74,7 @@
 "cleaner.clearFilters" = "Filtreleri temizle";
 "cleaner.showingItems" = "%d kategori içinde %d öğe gösteriliyor";
 "cleaner.noItemsMatch" = "Filtrelerinize uyan öğe yok";
+"cleaner.freedMessage" = "%@ disk alanı boşaltıldı";
 
 /* File Preview */
 "preview.title" = "Silinecek dosyaları incele";
@@ -207,6 +208,94 @@
 "settings.lowDiskThreshold" = "Boş alan şunun altına düştüğünde uyar";
 "settings.scheduledNotifications" = "Zamanlanmış görev bildirimleri";
 "settings.confirmScheduled" = "Zamanlanmış görevleri onayla";
+
+/* Apps */
+"apps.title" = "Uygulamalar";
+"apps.subtitle" = "Yüklü uygulamaları yönetin";
+"apps.loading" = "Uygulamalar yükleniyor...";
+"apps.scanning" = "/Applications taranıyor";
+"apps.searchApps" = "Uygulama ara...";
+"apps.clearSearch" = "Aramayı temizle";
+"apps.uninstall" = "Kaldır";
+"apps.showInFinder" = "Finder'da Göster";
+"apps.confirmUninstall" = "\"%@\" uygulamasını kaldırmak istediğinizden emin misiniz?\n\nBu işlem uygulamayı (%@) Çöp Kutusuna taşıyacak.";
+"apps.uninstallTitle" = "Uygulamayı kaldır";
+"apps.moveToTrash" = "Çöp Kutusuna Taşı";
+"apps.appUninstalled" = "Uygulama kaldırıldı";
+"apps.uninstalledMessage" = "\"%@\" Çöp Kutusuna taşındı.\n\nGerekirse Çöp Kutusundan geri yükleyebilirsiniz.";
+"apps.uninstallError" = "\"%@\" kaldırılamadı.\n\nUygulama kullanımda veya sistem tarafından korunuyor olabilir.";
+"apps.noAppsFound" = "Uygulama bulunamadı";
+"apps.noMatchingApps" = "Eşleşen uygulama yok";
+"apps.totalApps" = "Toplam uygulama";
+"apps.totalSize" = "Toplam boyut";
+"apps.sortByName" = "Ad";
+"apps.sortBySize" = "Boyut";
+"apps.sortByLastUsed" = "Son kullanım";
+"apps.sortBy" = "Sırala";
+"apps.openApp" = "Uygulamayı aç";
+
+/* Sidebar */
+"sidebar.health" = "Sağlık";
+
+/* Menu Bar */
+"menubar.systemHealth" = "Sistem sağlığı";
+"menubar.openApp" = "DodoTidy'yi Aç";
+"menubar.quit" = "Çıkış";
+"menubar.charging" = "Şarj oluyor";
+"menubar.quickClean" = "Hızlı temizle";
+"menubar.cleaning" = "Temizleniyor...";
+"menubar.analyze" = "Analiz et";
+"menubar.freed" = "%@ boşaltıldı";
+"menubar.systemClean" = "Sistem temiz";
+
+/* Dashboard extras */
+"dashboard.health" = "Sağlık:";
+"dashboard.capacity" = "Kapasite:";
+"dashboard.gpu" = "GPU";
+"dashboard.power" = "Güç";
+"dashboard.total" = "Toplam";
+"dashboard.connected.status" = "Bağlı";
+
+/* Scheduled extras */
+"scheduled.subtitle" = "Temizleme ve optimizasyon görevlerini otomatikleştirin";
+"scheduled.addTask" = "Görev ekle";
+"scheduled.addFirstTask" = "İlk görevinizi ekleyin";
+"scheduled.createAutomated" = "Sisteminizi temiz tutmak için otomatik görevler oluşturun";
+"scheduled.addScheduledTask" = "Zamanlanmış görev ekle";
+"scheduled.name" = "Ad";
+"scheduled.action" = "İşlem";
+"scheduled.schedule" = "Zamanlama";
+
+/* History extras */
+"history.subtitle" = "Geçmiş temizleme, optimizasyon ve analiz işlemlerini görüntüleyin";
+"history.operationsAppearHere" = "Gerçekleştirdiğiniz işlemler burada görünecek";
+"history.allOperations" = "Tüm işlemler";
+"history.filter" = "Filtre";
+"history.totalOperations" = "Toplam işlem";
+"history.spaceFreed" = "Boşaltılan alan";
+"history.successRate" = "Başarı oranı";
+"history.itemsProcessed" = "İşlenen öğeler";
+"history.duration" = "Süre";
+
+/* Operation types */
+"operation.cleaning" = "Temizlik";
+"operation.optimization" = "Optimizasyon";
+"operation.analysis" = "Analiz";
+"operation.uninstall" = "Kaldırma";
+
+/* Operation status */
+"status.success" = "Başarılı";
+"status.failed" = "Başarısız";
+"status.partial" = "Kısmi";
+
+/* Optimizer extras */
+"optimizer.failedStatus" = "Başarısız";
+"optimizer.optimizationComplete" = "Optimizasyon tamamlandı";
+"optimizer.optimizationFailed" = "Optimizasyon başarısız";
+"optimizer.optimizationsCompleted" = "Optimizasyonlar tamamlandı";
+"optimizer.completedWithFailures" = "%d başarılı, %d başarısız";
+"optimizer.allComplete" = "Tüm optimizasyonlar tamamlandı";
+"optimizer.tasksCompleted" = "%d görev başarıyla tamamlandı";
 
 /* Common */
 "common.refresh" = "Yenile";

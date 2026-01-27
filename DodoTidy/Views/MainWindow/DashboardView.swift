@@ -32,9 +32,9 @@ struct DashboardView: View {
                         await dodoService.status.fetchMetrics()
                     }
                 } label: {
-                    Label("Refresh", systemImage: "arrow.clockwise")
+                    Label(String(localized: "common.refresh"), systemImage: "arrow.clockwise")
                 }
-                .help("Refresh system metrics")
+                .help(String(localized: "common.refresh"))
             }
 
             ToolbarItem(placement: .automatic) {
@@ -214,13 +214,13 @@ struct DashboardView: View {
                     .frame(height: 8)
 
                     HStack {
-                        Text("Health: \(battery.health)")
+                        Text("\(String(localized: "dashboard.health")) \(battery.health)")
                             .font(.dodoCaption)
                             .foregroundColor(battery.health == "Good" ? .dodoSuccess : .dodoWarning)
 
                         Spacer()
 
-                        Text("Capacity: \(battery.capacity)%")
+                        Text("\(String(localized: "dashboard.capacity")) \(battery.capacity)%")
                             .font(.dodoCaption)
                             .foregroundColor(.dodoTextTertiary)
                     }
@@ -259,7 +259,7 @@ struct DashboardView: View {
                     HStack(spacing: DodoTidyDimensions.spacing) {
                         if thermal.cpuTemp > 0 {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("CPU")
+                                Text(String(localized: "dashboard.cpu"))
                                     .font(.dodoCaption)
                                     .foregroundColor(.dodoTextTertiary)
 
@@ -281,7 +281,7 @@ struct DashboardView: View {
 
                         if thermal.gpuTemp > 0 {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("GPU")
+                                Text(String(localized: "dashboard.gpu"))
                                     .font(.dodoCaption)
                                     .foregroundColor(.dodoTextTertiary)
 
@@ -303,7 +303,7 @@ struct DashboardView: View {
 
                         if thermal.systemPower > 0 {
                             VStack(alignment: .trailing, spacing: 4) {
-                                Text("Power")
+                                Text(String(localized: "dashboard.power"))
                                     .font(.dodoCaption)
                                     .foregroundColor(.dodoTextTertiary)
 
@@ -536,7 +536,7 @@ struct DashboardView: View {
                                             .foregroundColor(.dodoTextTertiary)
                                     }
                                 } else {
-                                    Text("Connected")
+                                    Text(String(localized: "dashboard.connected.status"))
                                         .font(.dodoCaptionSmall)
                                         .foregroundColor(.dodoSuccess)
                                 }

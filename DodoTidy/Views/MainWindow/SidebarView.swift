@@ -79,7 +79,7 @@ struct SidebarView: View {
             }
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("Health")
+                Text(String(localized: "sidebar.health"))
                     .font(.dodoCaption)
                     .foregroundColor(.dodoTextSecondary)
 

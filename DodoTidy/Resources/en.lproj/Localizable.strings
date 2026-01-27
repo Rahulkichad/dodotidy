@@ -74,6 +74,7 @@
 "cleaner.clearFilters" = "Clear filters";
 "cleaner.showingItems" = "Showing %d items in %d categories";
 "cleaner.noItemsMatch" = "No items match your filters";
+"cleaner.freedMessage" = "Freed %@ of disk space";
 
 /* File Preview */
 "preview.title" = "Review files to be deleted";
@@ -207,6 +208,94 @@
 "settings.lowDiskThreshold" = "Alert when free space below";
 "settings.scheduledNotifications" = "Scheduled task notifications";
 "settings.confirmScheduled" = "Confirm scheduled tasks";
+
+/* Apps */
+"apps.title" = "Applications";
+"apps.subtitle" = "Manage installed applications";
+"apps.loading" = "Loading applications...";
+"apps.scanning" = "Scanning /Applications";
+"apps.searchApps" = "Search apps...";
+"apps.clearSearch" = "Clear search";
+"apps.uninstall" = "Uninstall";
+"apps.showInFinder" = "Show in Finder";
+"apps.confirmUninstall" = "Are you sure you want to uninstall \"%@\"?\n\nThis will move the application (%@) to Trash.";
+"apps.uninstallTitle" = "Uninstall application";
+"apps.moveToTrash" = "Move to Trash";
+"apps.appUninstalled" = "Application uninstalled";
+"apps.uninstalledMessage" = "\"%@\" has been moved to Trash.\n\nYou can restore it from Trash if needed.";
+"apps.uninstallError" = "Could not uninstall \"%@\".\n\nThe app may be in use or protected by the system.";
+"apps.noAppsFound" = "No applications found";
+"apps.noMatchingApps" = "No matching applications";
+"apps.totalApps" = "Total apps";
+"apps.totalSize" = "Total size";
+"apps.sortByName" = "Name";
+"apps.sortBySize" = "Size";
+"apps.sortByLastUsed" = "Last used";
+"apps.sortBy" = "Sort by";
+"apps.openApp" = "Open app";
+
+/* Sidebar */
+"sidebar.health" = "Health";
+
+/* Menu Bar */
+"menubar.systemHealth" = "System health";
+"menubar.openApp" = "Open DodoTidy";
+"menubar.quit" = "Quit";
+"menubar.charging" = "Charging";
+"menubar.quickClean" = "Quick clean";
+"menubar.cleaning" = "Cleaning...";
+"menubar.analyze" = "Analyze";
+"menubar.freed" = "Freed %@";
+"menubar.systemClean" = "System is clean";
+
+/* Dashboard extras */
+"dashboard.health" = "Health:";
+"dashboard.capacity" = "Capacity:";
+"dashboard.gpu" = "GPU";
+"dashboard.power" = "Power";
+"dashboard.total" = "Total";
+"dashboard.connected.status" = "Connected";
+
+/* Scheduled extras */
+"scheduled.subtitle" = "Automate cleaning and optimization tasks";
+"scheduled.addTask" = "Add task";
+"scheduled.addFirstTask" = "Add your first task";
+"scheduled.createAutomated" = "Create automated tasks to keep your system clean";
+"scheduled.addScheduledTask" = "Add scheduled task";
+"scheduled.name" = "Name";
+"scheduled.action" = "Action";
+"scheduled.schedule" = "Schedule";
+
+/* History extras */
+"history.subtitle" = "View past cleaning, optimization, and analysis operations";
+"history.operationsAppearHere" = "Operations you perform will appear here";
+"history.allOperations" = "All operations";
+"history.filter" = "Filter";
+"history.totalOperations" = "Total operations";
+"history.spaceFreed" = "Space freed";
+"history.successRate" = "Success rate";
+"history.itemsProcessed" = "Items processed";
+"history.duration" = "Duration";
+
+/* Operation types */
+"operation.cleaning" = "Cleaning";
+"operation.optimization" = "Optimization";
+"operation.analysis" = "Analysis";
+"operation.uninstall" = "Uninstall";
+
+/* Operation status */
+"status.success" = "Success";
+"status.failed" = "Failed";
+"status.partial" = "Partial";
+
+/* Optimizer extras */
+"optimizer.failedStatus" = "Failed";
+"optimizer.optimizationComplete" = "Optimization complete";
+"optimizer.optimizationFailed" = "Optimization failed";
+"optimizer.optimizationsCompleted" = "Optimizations completed";
+"optimizer.completedWithFailures" = "%d succeeded, %d failed";
+"optimizer.allComplete" = "All optimizations complete";
+"optimizer.tasksCompleted" = "%d tasks completed successfully";
 
 /* Common */
 "common.refresh" = "Refresh";

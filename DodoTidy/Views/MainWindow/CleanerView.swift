@@ -29,6 +29,16 @@ struct CleanerView: View {
             case .over1GB: return 1_000_000_000
             }
         }
+
+        var localizedName: String {
+            switch self {
+            case .any: return String(localized: "cleaner.anySize")
+            case .over10MB: return "> 10 MB"
+            case .over100MB: return "> 100 MB"
+            case .over500MB: return "> 500 MB"
+            case .over1GB: return "> 1 GB"
+            }
+        }
     }
 
     private var filteredCategories: [CleaningCategory] {
@@ -106,21 +116,21 @@ struct CleanerView: View {
                 await dodoService.cleaner.scanForCleanableItems()
             }
         }
-        .alert("Confirm cleaning", isPresented: $showConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Move to Trash", role: .destructive) {
+        .alert(String(localized: "cleaner.confirmTitle"), isPresented: $showConfirmation) {
+            Button(String(localized: "common.cancel"), role: .cancel) { }
+            Button(String(localized: "cleaner.moveToTrash"), role: .destructive) {
                 Task {
                     await dodoService.cleaner.cleanSelectedItems()
                     // Show toast notification
                     ToastManager.shared.show(ToastData(
                         type: .success,
-                        title: "Cleaning complete",
-                        message: "Freed \(dodoService.cleaner.lastCleanedSize.formattedBytes) of disk space"
+                        title: String(localized: "cleaner.completeTitle"),
+                        message: String(format: String(localized: "cleaner.freedMessage"), dodoService.cleaner.lastCleanedSize.formattedBytes)
                     ))
                 }
             }
         } message: {
-            Text("Are you sure you want to move \(dodoService.cleaner.totalSelectedCount) items (\(dodoService.cleaner.totalSelectedSize.formattedBytes)) to Trash?\n\nThis action can be undone by restoring items from Trash.")
+            Text(String(format: String(localized: "cleaner.confirmMessage"), dodoService.cleaner.totalSelectedCount, dodoService.cleaner.totalSelectedSize.formattedBytes))
         }
         .sheet(isPresented: $showFilePreview) {
             FilePreviewSheet(
@@ -134,8 +144,8 @@ struct CleanerView: View {
                         await dodoService.cleaner.cleanSelectedItems()
                         ToastManager.shared.show(ToastData(
                             type: .success,
-                            title: "Cleaning complete",
-                            message: "Freed \(dodoService.cleaner.lastCleanedSize.formattedBytes) of disk space"
+                            title: String(localized: "cleaner.completeTitle"),
+                            message: String(format: String(localized: "cleaner.freedMessage"), dodoService.cleaner.lastCleanedSize.formattedBytes)
                         ))
                     }
                 },
@@ -152,9 +162,9 @@ struct CleanerView: View {
                         await dodoService.cleaner.scanForCleanableItems()
                     }
                 } label: {
-                    Label("Scan", systemImage: "arrow.clockwise")
+                    Label(String(localized: "cleaner.rescan"), systemImage: "arrow.clockwise")
                 }
-                .help("Scan for cleanable items")
+                .help(String(localized: "cleaner.rescan"))
                 .disabled(dodoService.cleaner.isScanning)
             }
         }
@@ -234,7 +244,7 @@ struct CleanerView: View {
                         minSizeFilter = filter
                     } label: {
                         HStack {
-                            Text(filter.rawValue)
+                            Text(filter.localizedName)
                             if minSizeFilter == filter {
                                 Image(systemName: "checkmark")
                             }
@@ -244,7 +254,7 @@ struct CleanerView: View {
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: "arrow.up.arrow.down")
-                    Text(minSizeFilter.rawValue)
+                    Text(minSizeFilter.localizedName)
                     Image(systemName: "chevron.down")
                         .font(.system(size: 11))
                 }
@@ -254,7 +264,7 @@ struct CleanerView: View {
 
             // Category filter
             Menu {
-                Button("All categories") {
+                Button(String(localized: "cleaner.allCategories")) {
                     selectedCategories.removeAll()
                 }
 
@@ -497,7 +507,7 @@ struct CleanerView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.dodoDanger)
 
-            Text("Something went wrong")
+            Text(String(localized: "common.somethingWrong"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
@@ -512,7 +522,7 @@ struct CleanerView: View {
                     await dodoService.cleaner.scanForCleanableItems()
                 }
             } label: {
-                Text("Try again")
+                Text(String(localized: "optimizer.tryAgain"))
             }
             .buttonStyle(.dodoPrimary)
         }
@@ -557,7 +567,7 @@ struct CleanerView: View {
                     HStack {
                         Image(systemName: "line.3.horizontal.decrease.circle")
                             .foregroundColor(.dodoTextTertiary)
-                        Text("Showing \(filteredCategories.flatMap { $0.items }.count) items in \(filteredCategories.count) categories")
+                        Text(String(format: String(localized: "cleaner.showingItems"), filteredCategories.flatMap { $0.items }.count, filteredCategories.count))
                             .font(.dodoCaption)
                             .foregroundColor(.dodoTextSecondary)
                         Spacer()
@@ -587,7 +597,7 @@ struct CleanerView: View {
                             .font(.system(size: 32))
                             .foregroundColor(.dodoTextTertiary)
 
-                        Text("No items match your filters")
+                        Text(String(localized: "cleaner.noItemsMatch"))
                             .font(.dodoBody)
                             .foregroundColor(.dodoTextSecondary)
 
@@ -596,7 +606,7 @@ struct CleanerView: View {
                             minSizeFilter = .any
                             selectedCategories.removeAll()
                         } label: {
-                            Text("Clear filters")
+                            Text(String(localized: "cleaner.clearFilters"))
                         }
                         .buttonStyle(.dodoSecondary)
                     }
@@ -772,7 +782,7 @@ struct CleaningItemRow: View {
                     .font(.dodoBody)
                     .foregroundColor(.dodoTextPrimary)
 
-                Text("\(item.fileCount.formattedWithSeparator) files")
+                Text(String(format: String(localized: "cleaner.files"), item.fileCount.formattedWithSeparator))
                     .font(.dodoCaptionSmall)
                     .foregroundColor(.dodoTextTertiary)
             }
@@ -836,11 +846,11 @@ struct FilePreviewSheet: View {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundColor(.dodoWarning)
                             .font(.system(size: 20))
-                        Text("Review files to be deleted")
+                        Text(String(localized: "preview.title"))
                             .font(.dodoTitle)
                             .foregroundColor(.dodoTextPrimary)
                     }
-                    Text("The following files will be moved to Trash")
+                    Text(String(localized: "preview.subtitle"))
                         .font(.dodoCaption)
                         .foregroundColor(.dodoTextTertiary)
                 }
@@ -864,7 +874,7 @@ struct FilePreviewSheet: View {
             if isLoading {
                 VStack(spacing: 16) {
                     ProgressView()
-                    Text("Loading file preview...")
+                    Text(String(localized: "preview.loadingPreview"))
                         .font(.dodoBody)
                         .foregroundColor(.dodoTextSecondary)
                 }
@@ -912,7 +922,7 @@ struct FilePreviewSheet: View {
             // Footer
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Total to be removed")
+                    Text(String(localized: "preview.totalToRemove"))
                         .font(.dodoCaption)
                         .foregroundColor(.dodoTextTertiary)
 
@@ -921,7 +931,7 @@ struct FilePreviewSheet: View {
                             .font(.dodoHeadline)
                             .foregroundColor(.dodoTextPrimary)
 
-                        Text("(\(totalCount) items)")
+                        Text(String(format: String(localized: "cleaner.items"), totalCount))
                             .font(.dodoCaption)
                             .foregroundColor(.dodoTextSecondary)
                     }
@@ -930,7 +940,7 @@ struct FilePreviewSheet: View {
                 Spacer()
 
                 HStack(spacing: 12) {
-                    Button("Cancel") {
+                    Button(String(localized: "common.cancel")) {
                         onCancel()
                     }
                     .buttonStyle(.dodoSecondary)
@@ -940,7 +950,7 @@ struct FilePreviewSheet: View {
                     } label: {
                         HStack(spacing: 6) {
                             Image(systemName: "trash")
-                            Text("Move to Trash")
+                            Text(String(localized: "cleaner.moveToTrash"))
                         }
                     }
                     .buttonStyle(.dodoPrimary)
@@ -1006,7 +1016,7 @@ struct FilePreviewItemView: View {
                 VStack(spacing: 0) {
                     // Path info
                     HStack {
-                        Text("Path:")
+                        Text(String(localized: "preview.path"))
                             .font(.dodoCaptionSmall)
                             .foregroundColor(.dodoTextTertiary)
                         Text(item.itemPath)
@@ -1024,7 +1034,7 @@ struct FilePreviewItemView: View {
                     if !item.sampleFiles.isEmpty {
                         VStack(spacing: 0) {
                             HStack {
-                                Text("Sample files (showing up to \(item.sampleFiles.count) of \(item.fileCount.formattedWithSeparator)):")
+                                Text(String(format: String(localized: "preview.sampleFiles"), item.sampleFiles.count, item.fileCount.formattedWithSeparator))
                                     .font(.dodoCaptionSmall)
                                     .foregroundColor(.dodoTextTertiary)
                                 Spacer()

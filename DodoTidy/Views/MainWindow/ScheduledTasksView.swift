@@ -267,11 +267,11 @@ struct ScheduledTasksView: View {
     private var headerSection: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Scheduled tasks")
+                Text(String(localized: "scheduled.title"))
                     .font(.dodoTitle)
                     .foregroundColor(.dodoTextPrimary)
 
-                Text("Automate cleaning and optimization tasks")
+                Text(String(localized: "scheduled.subtitle"))
                     .font(.dodoCaption)
                     .foregroundColor(.dodoTextTertiary)
             }
@@ -283,7 +283,7 @@ struct ScheduledTasksView: View {
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: "plus")
-                    Text("Add task")
+                    Text(String(localized: "scheduled.addTask"))
                 }
             }
             .buttonStyle(.dodoPrimary)
@@ -299,18 +299,18 @@ struct ScheduledTasksView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.dodoTextTertiary)
 
-            Text("No scheduled tasks")
+            Text(String(localized: "scheduled.noTasks"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
-            Text("Create automated tasks to keep your system clean")
+            Text(String(localized: "scheduled.createAutomated"))
                 .font(.dodoBody)
                 .foregroundColor(.dodoTextSecondary)
 
             Button {
                 showAddSheet = true
             } label: {
-                Text("Add your first task")
+                Text(String(localized: "scheduled.addFirstTask"))
             }
             .buttonStyle(.dodoPrimary)
         }
@@ -434,7 +434,7 @@ struct AddScheduledTaskSheet: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text("Add scheduled task")
+                Text(String(localized: "scheduled.addScheduledTask"))
                     .font(.dodoHeadline)
                     .foregroundColor(.dodoTextPrimary)
 
@@ -456,15 +456,15 @@ struct AddScheduledTaskSheet: View {
             // Form
             Form {
                 Section {
-                    TextField("Task name", text: $name)
+                    TextField(String(localized: "scheduled.name"), text: $name)
                         .textFieldStyle(.roundedBorder)
                         .multilineTextAlignment(.leading)
                 } header: {
-                    Text("Name")
+                    Text(String(localized: "scheduled.name"))
                 }
 
                 Section {
-                    Picker("Task type", selection: $taskType) {
+                    Picker(String(localized: "scheduled.action"), selection: $taskType) {
                         ForEach(ScheduledTaskType.allCases, id: \.self) { type in
                             HStack {
                                 Image(systemName: type.icon)
@@ -479,18 +479,18 @@ struct AddScheduledTaskSheet: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 } header: {
-                    Text("Action")
+                    Text(String(localized: "scheduled.action"))
                 }
 
                 Section {
-                    Picker("Frequency", selection: $frequency) {
+                    Picker(String(localized: "scheduled.schedule"), selection: $frequency) {
                         ForEach(TaskFrequency.allCases, id: \.self) { freq in
                             Text(freq.rawValue).tag(freq)
                         }
                     }
                     .pickerStyle(.segmented)
                 } header: {
-                    Text("Schedule")
+                    Text(String(localized: "scheduled.schedule"))
                 }
             }
             .formStyle(.grouped)

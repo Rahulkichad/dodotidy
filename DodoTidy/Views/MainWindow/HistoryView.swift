@@ -27,11 +27,11 @@ struct HistoryView: View {
     private var headerSection: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Operation history")
+                Text(String(localized: "history.title"))
                     .font(.dodoTitle)
                     .foregroundColor(.dodoTextPrimary)
 
-                Text("View past cleaning, optimization, and analysis operations")
+                Text(String(localized: "history.subtitle"))
                     .font(.dodoCaption)
                     .foregroundColor(.dodoTextTertiary)
             }
@@ -40,7 +40,7 @@ struct HistoryView: View {
 
             // Filter menu
             Menu {
-                Button("All operations") {
+                Button(String(localized: "history.allOperations")) {
                     selectedFilter = nil
                 }
 
@@ -52,7 +52,7 @@ struct HistoryView: View {
                     } label: {
                         HStack {
                             Image(systemName: type.icon)
-                            Text(type.rawValue)
+                            Text(type.localizedName)
                             if selectedFilter == type {
                                 Image(systemName: "checkmark")
                             }
@@ -62,7 +62,7 @@ struct HistoryView: View {
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: "line.3.horizontal.decrease.circle")
-                    Text(selectedFilter?.rawValue ?? "Filter")
+                    Text(selectedFilter?.localizedName ?? String(localized: "history.filter"))
                 }
             }
             .buttonStyle(.dodoSecondary)
@@ -72,7 +72,7 @@ struct HistoryView: View {
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: "trash")
-                    Text("Clear")
+                    Text(String(localized: "history.clear"))
                 }
             }
             .buttonStyle(.dodoSecondary)
@@ -89,11 +89,11 @@ struct HistoryView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.dodoTextTertiary)
 
-            Text("No operations yet")
+            Text(String(localized: "history.noOperations"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
-            Text("Operations you perform will appear here")
+            Text(String(localized: "history.operationsAppearHere"))
                 .font(.dodoBody)
                 .foregroundColor(.dodoTextSecondary)
         }
@@ -131,7 +131,7 @@ struct HistoryView: View {
     private var statsBar: some View {
         HStack(spacing: DodoTidyDimensions.spacingLarge) {
             StatItem(
-                label: "Total operations",
+                label: String(localized: "history.totalOperations"),
                 value: "\(historyManager.operations.count)"
             )
 
@@ -139,7 +139,7 @@ struct HistoryView: View {
                 .frame(height: 30)
 
             StatItem(
-                label: "Space freed",
+                label: String(localized: "history.spaceFreed"),
                 value: historyManager.totalSpaceFreed.formattedBytes
             )
 
@@ -147,7 +147,7 @@ struct HistoryView: View {
                 .frame(height: 30)
 
             StatItem(
-                label: "Success rate",
+                label: String(localized: "history.successRate"),
                 value: "\(historyManager.successRate)%"
             )
 
@@ -207,7 +207,7 @@ struct OperationRow: View {
                             .foregroundColor(.dodoTextPrimary)
 
                         HStack(spacing: 8) {
-                            Text(operation.type.rawValue)
+                            Text(operation.type.localizedName)
                                 .font(.dodoCaptionSmall)
                                 .foregroundColor(.dodoTextTertiary)
 
@@ -228,7 +228,7 @@ struct OperationRow: View {
                             .fill(statusColor)
                             .frame(width: 6, height: 6)
 
-                        Text(operation.status.rawValue)
+                        Text(operation.status.localizedName)
                             .font(.dodoCaption)
                             .foregroundColor(statusColor)
                     }
@@ -264,15 +264,15 @@ struct OperationRow: View {
 
                     HStack(spacing: DodoTidyDimensions.spacingLarge) {
                         if operation.itemsProcessed > 0 {
-                            DetailItem(label: "Items processed", value: "\(operation.itemsProcessed)")
+                            DetailItem(label: String(localized: "history.itemsProcessed"), value: "\(operation.itemsProcessed)")
                         }
 
                         if operation.spaceFreed > 0 {
-                            DetailItem(label: "Space freed", value: operation.spaceFreed.formattedBytes)
+                            DetailItem(label: String(localized: "history.spaceFreed"), value: operation.spaceFreed.formattedBytes)
                         }
 
                         if operation.duration > 0 {
-                            DetailItem(label: "Duration", value: formatDuration(operation.duration))
+                            DetailItem(label: String(localized: "history.duration"), value: formatDuration(operation.duration))
                         }
                     }
 
@@ -442,10 +442,27 @@ enum OperationType: String, Codable, CaseIterable {
         case .uninstall: return "xmark.app"
         }
     }
+
+    var localizedName: String {
+        switch self {
+        case .cleaning: return String(localized: "operation.cleaning")
+        case .optimization: return String(localized: "operation.optimization")
+        case .analysis: return String(localized: "operation.analysis")
+        case .uninstall: return String(localized: "operation.uninstall")
+        }
+    }
 }
 
 enum OperationStatus: String, Codable {
     case success = "Success"
     case failed = "Failed"
     case partial = "Partial"
+
+    var localizedName: String {
+        switch self {
+        case .success: return String(localized: "status.success")
+        case .failed: return String(localized: "status.failed")
+        case .partial: return String(localized: "status.partial")
+        }
+    }
 }
