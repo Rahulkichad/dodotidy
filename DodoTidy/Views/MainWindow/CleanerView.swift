@@ -3,7 +3,6 @@ import SwiftUI
 struct CleanerView: View {
     @State private var dodoService = DodoTidyService.shared
     @State private var showConfirmation = false
-    @State private var showCleanedAlert = false
     @State private var showFilePreview = false
     @State private var previewFiles: [FilePreviewItem] = []
     @State private var isLoadingPreview = false
@@ -112,16 +111,16 @@ struct CleanerView: View {
             Button("Move to Trash", role: .destructive) {
                 Task {
                     await dodoService.cleaner.cleanSelectedItems()
-                    showCleanedAlert = true
+                    // Show toast notification
+                    ToastManager.shared.show(ToastData(
+                        type: .success,
+                        title: "Cleaning complete",
+                        message: "Freed \(dodoService.cleaner.lastCleanedSize.formattedBytes) of disk space"
+                    ))
                 }
             }
         } message: {
             Text("Are you sure you want to move \(dodoService.cleaner.totalSelectedCount) items (\(dodoService.cleaner.totalSelectedSize.formattedBytes)) to Trash?\n\nThis action can be undone by restoring items from Trash.")
-        }
-        .alert("Cleaning complete", isPresented: $showCleanedAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("Successfully freed \(dodoService.cleaner.lastCleanedSize.formattedBytes) of disk space.\n\nItems have been moved to Trash.")
         }
         .sheet(isPresented: $showFilePreview) {
             FilePreviewSheet(
@@ -133,7 +132,11 @@ struct CleanerView: View {
                     showFilePreview = false
                     Task {
                         await dodoService.cleaner.cleanSelectedItems()
-                        showCleanedAlert = true
+                        ToastManager.shared.show(ToastData(
+                            type: .success,
+                            title: "Cleaning complete",
+                            message: "Freed \(dodoService.cleaner.lastCleanedSize.formattedBytes) of disk space"
+                        ))
                     }
                 },
                 onCancel: {
@@ -141,7 +144,7 @@ struct CleanerView: View {
                 }
             )
         }
-        .navigationTitle("Cleaner")
+        .navigationTitle("")
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button {
@@ -163,11 +166,11 @@ struct CleanerView: View {
         VStack(spacing: 12) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("System cleaner")
+                    Text(String(localized: "cleaner.title"))
                         .font(.dodoTitle)
                         .foregroundColor(.dodoTextPrimary)
 
-                    Text("Remove unnecessary files to free up disk space")
+                    Text(String(localized: "cleaner.subtitle"))
                         .font(.dodoCaption)
                         .foregroundColor(.dodoTextTertiary)
                 }
@@ -181,7 +184,7 @@ struct CleanerView: View {
                 } label: {
                     HStack(spacing: 6) {
                         Image(systemName: "arrow.clockwise")
-                        Text("Rescan")
+                        Text(String(localized: "cleaner.rescan"))
                     }
                 }
                 .buttonStyle(.dodoSecondary)
@@ -204,7 +207,7 @@ struct CleanerView: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.dodoTextTertiary)
 
-                TextField("Search items...", text: $searchText)
+                TextField(String(localized: "cleaner.searchItems"), text: $searchText)
                     .textFieldStyle(.plain)
                     .font(.dodoBody)
 
@@ -219,7 +222,7 @@ struct CleanerView: View {
                 }
             }
             .padding(.horizontal, 10)
-            .padding(.vertical, 6)
+            .frame(height: DodoTidyDimensions.buttonHeight)
             .background(Color.dodoBackgroundTertiary)
             .clipShape(RoundedRectangle(cornerRadius: DodoTidyDimensions.borderRadius))
             .frame(maxWidth: 220)
@@ -277,7 +280,7 @@ struct CleanerView: View {
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: "line.3.horizontal.decrease.circle")
-                    Text(selectedCategories.isEmpty ? "Categories" : "\(selectedCategories.count) selected")
+                    Text(selectedCategories.isEmpty ? String(localized: "cleaner.categories") : String(localized: "cleaner.selected \(selectedCategories.count)"))
                     Image(systemName: "chevron.down")
                         .font(.system(size: 11))
                 }
@@ -292,7 +295,7 @@ struct CleanerView: View {
                 Button {
                     selectAllVisible()
                 } label: {
-                    Text("Select all")
+                    Text(String(localized: "cleaner.selectAll"))
                 }
                 .buttonStyle(.plain)
                 .foregroundColor(.dodoPrimary)
@@ -304,7 +307,7 @@ struct CleanerView: View {
                 Button {
                     deselectAllVisible()
                 } label: {
-                    Text("Deselect all")
+                    Text(String(localized: "cleaner.deselectAll"))
                 }
                 .buttonStyle(.plain)
                 .foregroundColor(.dodoTextSecondary)
@@ -320,7 +323,7 @@ struct CleanerView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "xmark")
-                        Text("Clear filters")
+                        Text(String(localized: "cleaner.clearFilters"))
                     }
                     .font(.dodoCaption)
                 }
@@ -410,41 +413,80 @@ struct CleanerView: View {
 
     // MARK: - Loading View
 
-    private var loadingView: some View {
-        VStack(spacing: 20) {
-            // Progress ring
-            ZStack {
-                Circle()
-                    .stroke(Color.dodoBackgroundTertiary, lineWidth: 8)
-                    .frame(width: 80, height: 80)
+    @State private var fileAnimationOffsets: [CGFloat] = [0, 0, 0]
+    @State private var fileAnimationOpacities: [Double] = [1, 1, 1]
+    @State private var trashPulseScale: CGFloat = 1.0
 
+    private var loadingView: some View {
+        VStack(spacing: 24) {
+            // Animated trash with files
+            ZStack {
+                // Trash can icon
+                Image(systemName: "trash")
+                    .font(.system(size: 56))
+                    .foregroundColor(.dodoPrimary)
+                    .scaleEffect(trashPulseScale)
+
+                // Animated file icons
+                ForEach(0..<3, id: \.self) { index in
+                    Image(systemName: "doc.fill")
+                        .font(.system(size: 14))
+                        .foregroundColor(.dodoTextTertiary)
+                        .offset(x: CGFloat(index - 1) * 18, y: fileAnimationOffsets[index] - 50)
+                        .opacity(fileAnimationOpacities[index])
+                }
+
+                // Progress overlay
                 Circle()
                     .trim(from: 0, to: dodoService.cleaner.scanProgress)
-                    .stroke(Color.dodoPrimary, style: StrokeStyle(lineWidth: 8, lineCap: .round))
-                    .frame(width: 80, height: 80)
+                    .stroke(Color.dodoPrimary.opacity(0.3), style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                    .frame(width: 90, height: 90)
                     .rotationEffect(.degrees(-90))
-                    .animation(.easeInOut(duration: 0.2), value: dodoService.cleaner.scanProgress)
-
-                Text("\(Int(dodoService.cleaner.scanProgress * 100))%")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.dodoTextPrimary)
-                    .monospacedDigit()
+            }
+            .frame(height: 100)
+            .onAppear {
+                startLoadingAnimation()
             }
 
-            VStack(spacing: 4) {
-                Text("Scanning for cleanable items...")
+            VStack(spacing: 8) {
+                Text(String(localized: "cleaner.scanning"))
                     .font(.dodoBody)
                     .foregroundColor(.dodoTextSecondary)
+
+                // Progress percentage
+                Text("\(Int(dodoService.cleaner.scanProgress * 100))%")
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(.dodoPrimary)
+                    .monospacedDigit()
+                    .contentTransition(.numericText())
 
                 if !dodoService.cleaner.currentScanItem.isEmpty {
                     Text(dodoService.cleaner.currentScanItem)
                         .font(.dodoCaption)
                         .foregroundColor(.dodoTextTertiary)
-                        .animation(.easeInOut(duration: 0.1), value: dodoService.cleaner.currentScanItem)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .frame(maxWidth: 300)
                 }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func startLoadingAnimation() {
+        // Animate files falling into trash
+        for index in 0..<3 {
+            let delay = Double(index) * 0.25
+            withAnimation(.easeIn(duration: 0.5).delay(delay).repeatForever(autoreverses: false)) {
+                fileAnimationOffsets[index] = 70
+                fileAnimationOpacities[index] = 0
+            }
+        }
+
+        // Pulse trash can
+        withAnimation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true)) {
+            trashPulseScale = 1.08
+        }
     }
 
     // MARK: - Error State
@@ -485,11 +527,11 @@ struct CleanerView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.dodoPrimary)
 
-            Text("Your system is clean")
+            Text(String(localized: "cleaner.systemClean"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
-            Text("No unnecessary files were found")
+            Text(String(localized: "cleaner.noUnnecessary"))
                 .font(.dodoBody)
                 .foregroundColor(.dodoTextSecondary)
 
@@ -498,7 +540,7 @@ struct CleanerView: View {
                     await dodoService.cleaner.scanForCleanableItems()
                 }
             } label: {
-                Text("Scan again")
+                Text(String(localized: "cleaner.scanAgain"))
             }
             .buttonStyle(.dodoPrimary)
         }
@@ -571,7 +613,7 @@ struct CleanerView: View {
     private var footerSection: some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Total selected")
+                Text(String(localized: "cleaner.totalSelected"))
                     .font(.dodoCaption)
                     .foregroundColor(.dodoTextTertiary)
 
@@ -580,7 +622,7 @@ struct CleanerView: View {
                         .font(.dodoHeadline)
                         .foregroundColor(.dodoTextPrimary)
 
-                    Text("(\(dodoService.cleaner.totalSelectedCount) items)")
+                    Text(String(localized: "cleaner.items \(dodoService.cleaner.totalSelectedCount)"))
                         .font(.dodoCaption)
                         .foregroundColor(.dodoTextSecondary)
                 }
@@ -592,7 +634,7 @@ struct CleanerView: View {
             HStack(spacing: 4) {
                 Image(systemName: "info.circle")
                     .font(.system(size: 12))
-                Text("Items are moved to Trash")
+                Text(String(localized: "cleaner.movedToTrash"))
                     .font(.dodoCaptionSmall)
             }
             .foregroundColor(.dodoTextTertiary)
@@ -608,7 +650,7 @@ struct CleanerView: View {
                     } else {
                         Image(systemName: "trash")
                     }
-                    Text(dodoService.cleaner.isCleaning ? "Cleaning..." : (isLoadingPreview ? "Loading..." : "Clean selected"))
+                    Text(dodoService.cleaner.isCleaning ? String(localized: "cleaner.cleaning") : (isLoadingPreview ? String(localized: "cleaner.loading") : String(localized: "cleaner.cleanSelected")))
                 }
             }
             .buttonStyle(.dodoPrimary)

@@ -19,6 +19,7 @@ struct HistoryView: View {
                 contentView
             }
         }
+        .navigationTitle("")
     }
 
     // MARK: - Header

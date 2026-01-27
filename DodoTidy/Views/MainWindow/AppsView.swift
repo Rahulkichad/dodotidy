@@ -38,7 +38,7 @@ struct AppsView: View {
                 contentView
             }
         }
-        .navigationTitle("Apps")
+        .navigationTitle("")
         .searchable(text: $searchText, prompt: "Search apps")
         .toolbar {
             ToolbarItem(placement: .automatic) {
@@ -113,16 +113,40 @@ struct AppsView: View {
 
     // MARK: - Loading View
 
-    private var loadingView: some View {
-        VStack(spacing: 16) {
-            ProgressView()
-                .scaleEffect(1.5)
+    @State private var appBounceOffset: CGFloat = 0
 
-            Text("Loading applications...")
-                .font(.dodoBody)
-                .foregroundColor(.dodoTextSecondary)
+    private var loadingView: some View {
+        VStack(spacing: 24) {
+            HStack(spacing: 12) {
+                ForEach(0..<4, id: \.self) { index in
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.dodoBackgroundTertiary)
+                        .frame(width: 40, height: 40)
+                        .overlay(
+                            Image(systemName: "app.fill")
+                                .font(.system(size: 20))
+                                .foregroundColor(.dodoTextTertiary)
+                        )
+                        .offset(y: index % 2 == 0 ? appBounceOffset : -appBounceOffset)
+                }
+            }
+
+            VStack(spacing: 8) {
+                Text("Loading applications...")
+                    .font(.dodoBody)
+                    .foregroundColor(.dodoTextSecondary)
+
+                Text("Scanning /Applications")
+                    .font(.dodoCaption)
+                    .foregroundColor(.dodoTextTertiary)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            withAnimation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true)) {
+                appBounceOffset = -8
+            }
+        }
     }
 
     // MARK: - Empty State
@@ -165,6 +189,7 @@ struct AppsView: View {
                     ForEach(filteredApps) { app in
                         AppRow(
                             app: app,
+                            maxSize: maxAppSize,
                             isSelected: selectedApp?.id == app.id,
                             onSelect: {
                                 selectedApp = app
@@ -232,6 +257,10 @@ struct AppsView: View {
 
     private var totalSize: Int64 {
         apps.reduce(0) { $0 + $1.size }
+    }
+
+    private var maxAppSize: Int64 {
+        apps.map(\.size).max() ?? 0
     }
 
     // MARK: - Actions
@@ -339,11 +368,17 @@ struct StatItem: View {
 
 struct AppRow: View {
     let app: InstalledApp
+    let maxSize: Int64
     let isSelected: Bool
     let onSelect: () -> Void
     let onDelete: () -> Void
 
     @State private var isHovering = false
+
+    private var sizeRatio: CGFloat {
+        guard maxSize > 0 else { return 0 }
+        return CGFloat(app.size) / CGFloat(maxSize)
+    }
 
     var body: some View {
         Button(action: onSelect) {
@@ -415,6 +450,16 @@ struct AppRow: View {
             }
             .padding(.horizontal, DodoTidyDimensions.cardPaddingLarge)
             .padding(.vertical, 12)
+            .background(
+                GeometryReader { geometry in
+                    HStack(spacing: 0) {
+                        Rectangle()
+                            .fill(Color.dodoPrimary.opacity(0.08))
+                            .frame(width: geometry.size.width * sizeRatio)
+                        Spacer(minLength: 0)
+                    }
+                }
+            )
             .background(isSelected ? Color.dodoPrimary.opacity(0.15) : (isHovering ? Color.dodoBackgroundTertiary.opacity(0.5) : Color.clear))
             .contentShape(Rectangle())
         }

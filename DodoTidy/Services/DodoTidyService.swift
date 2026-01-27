@@ -133,6 +133,13 @@ final class StatusProvider {
         // Get Bluetooth devices
         let bluetoothDevices = getBluetoothDevices()
 
+        // Track history for sparklines
+        MetricsHistoryManager.shared.addCPU(cpuUsage)
+        MetricsHistoryManager.shared.addMemory(memoryInfo.usedPercent)
+        if let disk = diskInfo.first {
+            MetricsHistoryManager.shared.addDisk(disk.usedPercent)
+        }
+
         // Calculate health score
         let healthScore = calculateHealthScore(
             cpuUsage: cpuUsage,

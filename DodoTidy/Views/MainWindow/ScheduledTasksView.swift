@@ -259,6 +259,7 @@ struct ScheduledTasksView: View {
                 manager.addTask(task)
             }
         }
+        .navigationTitle("")
     }
 
     // MARK: - Header
@@ -457,6 +458,7 @@ struct AddScheduledTaskSheet: View {
                 Section {
                     TextField("Task name", text: $name)
                         .textFieldStyle(.roundedBorder)
+                        .multilineTextAlignment(.leading)
                 } header: {
                     Text("Name")
                 }

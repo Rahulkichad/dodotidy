@@ -117,6 +117,12 @@ final class AppSettings {
     var refreshInterval: Int {
         didSet { UserDefaults.standard.set(refreshInterval, forKey: "refreshInterval") }
     }
+    var appLanguage: String {
+        didSet {
+            UserDefaults.standard.set([appLanguage], forKey: "AppleLanguages")
+            UserDefaults.standard.synchronize()
+        }
+    }
 
     // Cleaning settings
     var confirmBeforeCleaning: Bool {
@@ -165,6 +171,7 @@ final class AppSettings {
         self.launchAtLogin = UserDefaults.standard.object(forKey: "launchAtLogin") as? Bool ?? false
         self.showMenuBarIcon = UserDefaults.standard.object(forKey: "showMenuBarIcon") as? Bool ?? true
         self.refreshInterval = UserDefaults.standard.object(forKey: "refreshInterval") as? Int ?? 2
+        self.appLanguage = (UserDefaults.standard.array(forKey: "AppleLanguages") as? [String])?.first ?? "en"
         self.confirmBeforeCleaning = UserDefaults.standard.object(forKey: "confirmBeforeCleaning") as? Bool ?? true
         self.moveToTrash = UserDefaults.standard.object(forKey: "moveToTrash") as? Bool ?? true
         self.excludedPaths = UserDefaults.standard.object(forKey: "excludedPaths") as? [String] ?? []
@@ -273,6 +280,21 @@ struct SettingsView: View {
                 }
             } header: {
                 Text("Startup & display")
+            }
+
+            Section {
+                Picker("Language", selection: $settings.appLanguage) {
+                    Text("English").tag("en")
+                    Text("Türkçe").tag("tr")
+                    Text("Deutsch").tag("de")
+                    Text("Français").tag("fr")
+                }
+
+                Text("Restart the app to apply language changes")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            } header: {
+                Text("Language")
             }
 
             Section {

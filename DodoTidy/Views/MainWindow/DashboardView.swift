@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DashboardView: View {
     @State private var dodoService = DodoTidyService.shared
+    @State private var metricsHistory = MetricsHistoryManager.shared
 
     var body: some View {
         ScrollView {
@@ -23,7 +24,7 @@ struct DashboardView: View {
             }
             .padding(DodoTidyDimensions.cardPaddingLarge)
         }
-        .navigationTitle("Dashboard")
+        .navigationTitle("")
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button {
@@ -57,36 +58,39 @@ struct DashboardView: View {
         // Always use 2x2 grid: CPU, Memory, Disk, Battery (or thermal if no battery)
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: DodoTidyDimensions.spacing) {
             MetricCard(
-                title: "CPU",
+                title: String(localized: "dashboard.cpu"),
                 value: cpuUsage.formattedPercentInt,
                 icon: "cpu",
                 progress: cpuUsage / 100,
                 color: colorForUsage(cpuUsage),
-                subtitle: "\(coreCount) cores"
+                subtitle: String(localized: "dashboard.cores \(coreCount)"),
+                historyData: metricsHistory.cpuHistory
             )
 
             MetricCard(
-                title: "Memory",
+                title: String(localized: "dashboard.memory"),
                 value: memoryUsage.formattedPercentInt,
                 icon: "memorychip",
                 progress: memoryUsage / 100,
                 color: colorForUsage(memoryUsage),
-                subtitle: memoryDetail
+                subtitle: memoryDetail,
+                historyData: metricsHistory.memoryHistory
             )
 
             MetricCard(
-                title: "Disk",
+                title: String(localized: "dashboard.disk"),
                 value: diskUsage.formattedPercentInt,
                 icon: "internaldrive",
                 progress: diskUsage / 100,
                 color: colorForUsage(diskUsage),
-                subtitle: diskDetail
+                subtitle: diskDetail,
+                historyData: metricsHistory.diskHistory
             )
 
             // Battery card next to disk (or placeholder if no battery)
             if hasBatteryData, let battery = dodoService.status.metrics?.batteries.first {
                 MetricCard(
-                    title: "Battery",
+                    title: String(localized: "dashboard.battery"),
                     value: "\(Int(battery.percent))%",
                     icon: batteryIcon,
                     progress: battery.percent / 100,
@@ -95,7 +99,7 @@ struct DashboardView: View {
                 )
             } else if hasThermalData, let thermal = dodoService.status.metrics?.thermal {
                 MetricCard(
-                    title: "Thermal",
+                    title: String(localized: "dashboard.thermal"),
                     value: thermal.cpuTemp > 0 ? String(format: "%.0f°C", thermal.cpuTemp) : "—",
                     icon: "thermometer.medium",
                     progress: thermal.cpuTemp > 0 ? min(thermal.cpuTemp / 100, 1.0) : 0,
@@ -105,7 +109,7 @@ struct DashboardView: View {
             } else {
                 // Placeholder card for consistent grid
                 MetricCard(
-                    title: "System",
+                    title: String(localized: "dashboard.system"),
                     value: "OK",
                     icon: "checkmark.circle",
                     progress: 0,
@@ -162,7 +166,7 @@ struct DashboardView: View {
                             .font(.system(size: 16))
                             .foregroundColor(batteryColor)
 
-                        Text("Battery")
+                        Text(String(localized: "dashboard.battery"))
                             .font(.dodoSubheadline)
                             .foregroundColor(.dodoTextSecondary)
 
@@ -235,7 +239,7 @@ struct DashboardView: View {
                             .font(.system(size: 16))
                             .foregroundColor(thermalColor(thermal.cpuTemp))
 
-                        Text("Thermal")
+                        Text(String(localized: "dashboard.thermal"))
                             .font(.dodoSubheadline)
                             .foregroundColor(.dodoTextSecondary)
 
@@ -348,15 +352,15 @@ struct DashboardView: View {
 
     private var quickActionsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Quick actions")
+            Text(String(localized: "dashboard.quickActions"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
             HStack(spacing: DodoTidyDimensions.spacing) {
                 QuickActionCard(
                     icon: "trash",
-                    title: "Smart clean",
-                    subtitle: "Free up space",
+                    title: String(localized: "dashboard.smartClean"),
+                    subtitle: String(localized: "dashboard.freeUpSpace"),
                     color: .dodoPrimary
                 ) {
                     NotificationCenter.default.post(name: .navigateTo, object: NavigationItem.cleaner)
@@ -364,8 +368,8 @@ struct DashboardView: View {
 
                 QuickActionCard(
                     icon: "bolt",
-                    title: "Optimize",
-                    subtitle: "Improve performance",
+                    title: String(localized: "dashboard.optimize"),
+                    subtitle: String(localized: "dashboard.improvePerformance"),
                     color: .dodoInfo
                 ) {
                     NotificationCenter.default.post(name: .navigateTo, object: NavigationItem.optimizer)
@@ -373,8 +377,8 @@ struct DashboardView: View {
 
                 QuickActionCard(
                     icon: "chart.pie",
-                    title: "Analyze disk",
-                    subtitle: "View storage usage",
+                    title: String(localized: "dashboard.analyzeDisk"),
+                    subtitle: String(localized: "dashboard.viewStorageUsage"),
                     color: .dodoWarning
                 ) {
                     NotificationCenter.default.post(name: .navigateTo, object: NavigationItem.analyzer)
@@ -387,7 +391,7 @@ struct DashboardView: View {
 
     private var systemInfoSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("System information")
+            Text(String(localized: "dashboard.systemInfo"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
@@ -396,12 +400,12 @@ struct DashboardView: View {
                     GridItem(.flexible()),
                     GridItem(.flexible()),
                 ], spacing: DodoTidyDimensions.spacing) {
-                    SystemInfoRow(label: "Model", value: metrics.hardware.model)
-                    SystemInfoRow(label: "Processor", value: metrics.hardware.cpuModel)
-                    SystemInfoRow(label: "Memory", value: metrics.hardware.totalRAM)
-                    SystemInfoRow(label: "Storage", value: metrics.hardware.diskSize)
+                    SystemInfoRow(label: String(localized: "dashboard.model"), value: metrics.hardware.model)
+                    SystemInfoRow(label: String(localized: "dashboard.processor"), value: metrics.hardware.cpuModel)
+                    SystemInfoRow(label: String(localized: "dashboard.memory"), value: metrics.hardware.totalRAM)
+                    SystemInfoRow(label: String(localized: "dashboard.storage"), value: metrics.hardware.diskSize)
                     SystemInfoRow(label: "macOS", value: metrics.hardware.osVersion)
-                    SystemInfoRow(label: "Hostname", value: metrics.host)
+                    SystemInfoRow(label: String(localized: "dashboard.hostname"), value: metrics.host)
                 }
             } else {
                 ProgressView()
@@ -497,13 +501,13 @@ struct DashboardView: View {
                         .font(.system(size: 16))
                         .foregroundColor(.dodoInfo)
 
-                    Text("Bluetooth devices")
+                    Text(String(localized: "dashboard.bluetooth"))
                         .font(.dodoSubheadline)
                         .foregroundColor(.dodoTextSecondary)
 
                     Spacer()
 
-                    Text("\(devices.count) connected")
+                    Text(String(localized: "dashboard.connected \(devices.count)"))
                         .font(.dodoCaption)
                         .foregroundColor(.dodoTextTertiary)
                 }
@@ -591,10 +595,10 @@ struct DashboardView: View {
     }
 
     private func thermalStatusMessage(_ temp: Double) -> String {
-        if temp < 50 { return "Running cool" }
-        if temp < 70 { return "Normal operating temperature" }
-        if temp < 85 { return "Running warm" }
-        return "Running hot - consider reducing workload"
+        if temp < 50 { return String(localized: "dashboard.runningCool") }
+        if temp < 70 { return String(localized: "dashboard.normalTemp") }
+        if temp < 85 { return String(localized: "dashboard.runningWarm") }
+        return String(localized: "dashboard.runningHot")
     }
 }
 
@@ -607,6 +611,14 @@ struct MetricCard: View {
     let progress: Double
     let color: Color
     let subtitle: String
+    var historyData: [Double] = []
+
+    @State private var previousProgress: Double = 0
+    @State private var showTrend: Bool = false
+
+    private var trend: Double {
+        progress - previousProgress
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -620,37 +632,72 @@ struct MetricCard: View {
                     .foregroundColor(.dodoTextSecondary)
 
                 Spacer()
-            }
 
-            HStack(alignment: .bottom, spacing: 8) {
-                Text(value)
-                    .font(.system(size: 32, weight: .bold))
-                    .foregroundColor(.dodoTextPrimary)
-                    .monospacedDigit()
-
-                Spacer()
-
-                // Mini progress ring
-                ZStack {
-                    Circle()
-                        .stroke(Color.dodoBackgroundTertiary, lineWidth: 4)
-                        .frame(width: 40, height: 40)
-
-                    Circle()
-                        .trim(from: 0, to: min(max(progress, 0), 1))
-                        .stroke(color, style: StrokeStyle(lineWidth: 4, lineCap: .round))
-                        .frame(width: 40, height: 40)
-                        .rotationEffect(.degrees(-90))
-                        .animation(.easeInOut(duration: 0.3), value: progress)
+                // Trend indicator
+                if showTrend && abs(trend) > 0.05 {
+                    HStack(spacing: 2) {
+                        Image(systemName: trend > 0 ? "arrow.up.right" : "arrow.down.right")
+                            .font(.system(size: 10))
+                        Text("\(abs(Int(trend * 100)))%")
+                            .font(.system(size: 10))
+                    }
+                    .foregroundColor(trend > 0 ? (progress > 0.7 ? .dodoWarning : .dodoTextTertiary) : .dodoSuccess)
+                    .transition(.scale.combined(with: .opacity))
                 }
             }
 
-            Text(subtitle)
-                .font(.dodoCaption)
-                .foregroundColor(.dodoTextTertiary)
-                .lineLimit(1)
+            HStack(alignment: .bottom, spacing: 8) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(value)
+                        .font(.system(size: 32, weight: .bold))
+                        .foregroundColor(.dodoTextPrimary)
+                        .monospacedDigit()
+                        .contentTransition(.numericText())
+
+                    Text(subtitle)
+                        .font(.dodoCaption)
+                        .foregroundColor(.dodoTextTertiary)
+                        .lineLimit(1)
+                }
+
+                Spacer()
+
+                // Sparkline chart or progress ring
+                if historyData.count > 2 {
+                    SparklineChart(data: historyData, color: color)
+                        .frame(width: 60, height: 30)
+                } else {
+                    // Mini progress ring with color zones
+                    ZStack {
+                        // Background zones
+                        Circle()
+                            .stroke(Color.dodoBackgroundTertiary, lineWidth: 4)
+                            .frame(width: 40, height: 40)
+
+                        Circle()
+                            .trim(from: 0, to: min(max(progress, 0), 1))
+                            .stroke(color, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                            .frame(width: 40, height: 40)
+                            .rotationEffect(.degrees(-90))
+                            .animation(.easeInOut(duration: 0.5), value: progress)
+                    }
+                }
+            }
         }
         .cardStyle()
+        .onChange(of: progress) { oldValue, newValue in
+            withAnimation(.easeInOut(duration: 0.3)) {
+                previousProgress = oldValue
+                showTrend = true
+            }
+
+            // Hide trend after 3 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                withAnimation {
+                    showTrend = false
+                }
+            }
+        }
     }
 }
 

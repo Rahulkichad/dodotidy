@@ -21,6 +21,7 @@ struct AnalyzerView: View {
                 emptyStateView
             }
         }
+        .navigationTitle("")
     }
 
     // MARK: - Header
@@ -28,7 +29,7 @@ struct AnalyzerView: View {
     private var headerSection: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Disk analyzer")
+                Text(String(localized: "analyzer.title"))
                     .font(.dodoTitle)
                     .foregroundColor(.dodoTextPrimary)
 
@@ -42,34 +43,34 @@ struct AnalyzerView: View {
 
             // Path picker
             Menu {
-                Button("Home") {
+                Button(String(localized: "analyzer.home")) {
                     currentPath = FileManager.default.homeDirectoryForCurrentUser.path
                     scanPath()
                 }
-                Button("Desktop") {
+                Button(String(localized: "analyzer.desktop")) {
                     currentPath = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop").path
                     scanPath()
                 }
-                Button("Documents") {
+                Button(String(localized: "analyzer.documents")) {
                     currentPath = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Documents").path
                     scanPath()
                 }
-                Button("Downloads") {
+                Button(String(localized: "analyzer.downloads")) {
                     currentPath = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Downloads").path
                     scanPath()
                 }
-                Button("Applications") {
+                Button(String(localized: "analyzer.applications")) {
                     currentPath = "/Applications"
                     scanPath()
                 }
                 Divider()
-                Button("Choose folder...") {
+                Button(String(localized: "analyzer.chooseFolder")) {
                     chooseFolder()
                 }
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: "folder")
-                    Text("Location")
+                    Text(String(localized: "analyzer.location"))
                     Image(systemName: "chevron.down")
                         .font(.system(size: 11))
                 }
@@ -81,7 +82,7 @@ struct AnalyzerView: View {
             } label: {
                 HStack(spacing: 6) {
                     Image(systemName: "magnifyingglass")
-                    Text("Scan")
+                    Text(String(localized: "analyzer.scan"))
                 }
             }
             .buttonStyle(.dodoPrimary)
@@ -91,14 +92,56 @@ struct AnalyzerView: View {
 
     // MARK: - Loading View
 
-    private var loadingView: some View {
-        VStack(spacing: 16) {
-            ProgressView()
-                .scaleEffect(1.5)
+    @State private var analyzerRotation: Double = 0
+    @State private var analyzerFillAmount: CGFloat = 0
 
-            Text("Scanning \(currentPath)...")
-                .font(.dodoBody)
-                .foregroundColor(.dodoTextSecondary)
+    private var loadingView: some View {
+        VStack(spacing: 24) {
+            ZStack {
+                // Background circle
+                Circle()
+                    .stroke(Color.dodoBackgroundTertiary, lineWidth: 6)
+                    .frame(width: 80, height: 80)
+
+                // Animated arc
+                Circle()
+                    .trim(from: 0, to: analyzerFillAmount)
+                    .stroke(
+                        AngularGradient(
+                            colors: [.dodoPrimary, .dodoInfo, .dodoWarning, .dodoPrimary],
+                            center: .center
+                        ),
+                        style: StrokeStyle(lineWidth: 6, lineCap: .round)
+                    )
+                    .frame(width: 80, height: 80)
+                    .rotationEffect(.degrees(analyzerRotation - 90))
+
+                // Center icon
+                Image(systemName: "chart.pie.fill")
+                    .font(.system(size: 28))
+                    .foregroundColor(.dodoPrimary)
+            }
+            .onAppear {
+                withAnimation(.linear(duration: 2).repeatForever(autoreverses: false)) {
+                    analyzerRotation = 360
+                }
+                withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
+                    analyzerFillAmount = 0.7
+                }
+            }
+
+            VStack(spacing: 8) {
+                Text(String(localized: "optimizer.analyzing"))
+                    .font(.dodoBody)
+                    .foregroundColor(.dodoTextSecondary)
+
+                Text(currentPath)
+                    .font(.dodoCaption)
+                    .foregroundColor(.dodoTextTertiary)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .frame(maxWidth: 300)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -111,11 +154,11 @@ struct AnalyzerView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.dodoTextTertiary)
 
-            Text("Analyze your disk usage")
+            Text(String(localized: "analyzer.analyzeUsage"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
-            Text("Select a location and click Scan to see what's using your disk space")
+            Text(String(localized: "analyzer.selectLocation"))
                 .font(.dodoBody)
                 .foregroundColor(.dodoTextSecondary)
                 .multilineTextAlignment(.center)
@@ -124,7 +167,7 @@ struct AnalyzerView: View {
             Button {
                 scanPath()
             } label: {
-                Text("Scan home folder")
+                Text(String(localized: "analyzer.scanHome"))
             }
             .buttonStyle(.dodoPrimary)
         }
@@ -166,7 +209,7 @@ struct AnalyzerView: View {
         HStack(spacing: DodoTidyDimensions.spacingLarge) {
             SummaryItem(
                 icon: "folder",
-                title: "Total size",
+                title: String(localized: "analyzer.totalSize"),
                 value: result.totalSize.formattedBytes
             )
 
@@ -175,7 +218,7 @@ struct AnalyzerView: View {
 
             SummaryItem(
                 icon: "doc",
-                title: "Files scanned",
+                title: String(localized: "analyzer.filesScanned"),
                 value: result.totalFiles.formattedWithSeparator
             )
 
@@ -184,7 +227,7 @@ struct AnalyzerView: View {
 
             SummaryItem(
                 icon: "folder.fill",
-                title: "Directories",
+                title: String(localized: "analyzer.directories"),
                 value: "\(result.entries.filter { $0.isDir }.count)"
             )
         }
@@ -201,11 +244,11 @@ struct AnalyzerView: View {
         VStack(spacing: 0) {
             // Tab bar
             HStack(spacing: 0) {
-                TabButton(title: "Directories", isSelected: selectedTab == 0) {
+                TabButton(title: String(localized: "analyzer.directories"), isSelected: selectedTab == 0) {
                     selectedTab = 0
                 }
 
-                TabButton(title: "Large files", isSelected: selectedTab == 1) {
+                TabButton(title: String(localized: "analyzer.largeFiles"), isSelected: selectedTab == 1) {
                     selectedTab = 1
                 }
 

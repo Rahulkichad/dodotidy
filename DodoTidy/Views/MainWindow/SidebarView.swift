@@ -34,10 +34,13 @@ struct SidebarView: View {
                     ForEach(NavigationItem.allCases) { item in
                         SidebarButton(
                             item: item,
-                            isSelected: selectedItem == item
-                        ) {
-                            selectedItem = item
-                        }
+                            isSelected: selectedItem == item,
+                            action: {
+                                selectedItem = item
+                            },
+                            badgeCount: badgeCount(for: item),
+                            badgeColor: badgeColor(for: item)
+                        )
                     }
                 }
                 .padding(.horizontal, 12)
@@ -45,9 +48,6 @@ struct SidebarView: View {
             }
 
             Spacer()
-
-            Divider()
-                .background(Color.dodoBorder.opacity(0.2))
 
             // Health score indicator at bottom
             healthIndicator
@@ -107,12 +107,46 @@ struct SidebarView: View {
         if healthScore >= 60 { return .dodoWarning }
         return .dodoDanger
     }
+
+    // MARK: - Badge Helpers
+
+    private func badgeCount(for item: NavigationItem) -> Int {
+        switch item {
+        case .dashboard:
+            // Show badge if health is critical (< 50)
+            return healthScore < 50 ? 1 : 0
+        case .cleaner:
+            // Show number of cleanable categories
+            let count = dodoService.cleaner.categories.filter { !$0.items.isEmpty }.count
+            return count > 0 ? count : 0
+        case .optimizer:
+            // Show number of pending optimization tasks
+            return dodoService.optimizer.pendingTaskCount
+        default:
+            return 0
+        }
+    }
+
+    private func badgeColor(for item: NavigationItem) -> Color {
+        switch item {
+        case .dashboard:
+            return healthScore < 50 ? .dodoDanger : .dodoWarning
+        case .cleaner:
+            return .dodoInfo
+        case .optimizer:
+            return .dodoWarning
+        default:
+            return .dodoPrimary
+        }
+    }
 }
 
 struct SidebarButton: View {
     let item: NavigationItem
     let isSelected: Bool
     let action: () -> Void
+    var badgeCount: Int = 0
+    var badgeColor: Color = .dodoDanger
 
     @State private var isHovering = false
 
@@ -129,8 +163,21 @@ struct SidebarButton: View {
 
                 Spacer()
 
-                // Show indicator when selected
-                if isSelected {
+                // Show badge if count > 0
+                if badgeCount > 0 {
+                    Text(badgeCount > 99 ? "99+" : "\(badgeCount)")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(
+                            Capsule()
+                                .fill(badgeColor)
+                        )
+                        .transition(.scale.combined(with: .opacity))
+                }
+                // Show indicator when selected and no badge
+                else if isSelected {
                     Circle()
                         .fill(Color.dodoPrimary)
                         .frame(width: 6, height: 6)

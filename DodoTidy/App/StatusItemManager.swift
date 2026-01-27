@@ -105,6 +105,28 @@ final class StatusItemManager: NSObject {
 
         menu.addItem(NSMenuItem.separator())
 
+        // Language submenu
+        let languageItem = NSMenuItem(title: "Language", action: nil, keyEquivalent: "")
+        languageItem.image = NSImage(systemSymbolName: "globe", accessibilityDescription: nil)
+        let languageMenu = NSMenu()
+
+        let currentLanguage = AppSettings.shared.appLanguage
+
+        let englishItem = NSMenuItem(title: "English", action: #selector(setEnglish), keyEquivalent: "")
+        englishItem.target = self
+        englishItem.state = currentLanguage == "en" ? .on : .off
+        languageMenu.addItem(englishItem)
+
+        let turkishItem = NSMenuItem(title: "Türkçe", action: #selector(setTurkish), keyEquivalent: "")
+        turkishItem.target = self
+        turkishItem.state = currentLanguage == "tr" ? .on : .off
+        languageMenu.addItem(turkishItem)
+
+        languageItem.submenu = languageMenu
+        menu.addItem(languageItem)
+
+        menu.addItem(NSMenuItem.separator())
+
         // GitHub repo link
         let githubItem = NSMenuItem(title: "View on GitHub", action: #selector(openGitHub), keyEquivalent: "")
         githubItem.target = self
@@ -122,6 +144,36 @@ final class StatusItemManager: NSObject {
         statusItem?.menu = menu
         button.performClick(nil)
         statusItem?.menu = nil
+    }
+
+    @objc private func setEnglish() {
+        AppSettings.shared.appLanguage = "en"
+        showRestartAlert()
+    }
+
+    @objc private func setTurkish() {
+        AppSettings.shared.appLanguage = "tr"
+        showRestartAlert()
+    }
+
+    private func showRestartAlert() {
+        let alert = NSAlert()
+        alert.messageText = "Restart required"
+        alert.informativeText = "Please restart DodoTidy to apply the language change."
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "Restart now")
+        alert.addButton(withTitle: "Later")
+
+        if alert.runModal() == .alertFirstButtonReturn {
+            // Restart the app
+            let url = URL(fileURLWithPath: Bundle.main.resourcePath!)
+            let path = url.deletingLastPathComponent().deletingLastPathComponent().absoluteString
+            let task = Process()
+            task.launchPath = "/usr/bin/open"
+            task.arguments = ["-n", path]
+            task.launch()
+            NSApp.terminate(nil)
+        }
     }
 
     @objc private func togglePopover(_ sender: NSStatusBarButton) {

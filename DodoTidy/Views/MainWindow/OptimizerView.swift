@@ -18,7 +18,7 @@ struct OptimizerView: View {
                 contentView
             }
         }
-        .navigationTitle("Optimizer")
+        .navigationTitle("")
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button {
@@ -26,9 +26,9 @@ struct OptimizerView: View {
                         await dodoService.optimizer.analyzeSystem()
                     }
                 } label: {
-                    Label("Reanalyze", systemImage: "arrow.clockwise")
+                    Label(String(localized: "optimizer.reanalyze"), systemImage: "arrow.clockwise")
                 }
-                .help("Reanalyze system for optimization tasks")
+                .help(String(localized: "optimizer.reanalyze"))
                 .disabled(dodoService.optimizer.isAnalyzing)
             }
 
@@ -37,9 +37,9 @@ struct OptimizerView: View {
                     Button {
                         showRunAllConfirmation = true
                     } label: {
-                        Label("Run all", systemImage: "play.fill")
+                        Label(String(localized: "optimizer.runAll"), systemImage: "play.fill")
                     }
-                    .help("Run all pending optimization tasks")
+                    .help(String(localized: "optimizer.runAll"))
                     .disabled(dodoService.optimizer.pendingTaskCount == 0)
                 }
             }
@@ -57,6 +57,25 @@ struct OptimizerView: View {
                 if let task = taskToConfirm {
                     Task {
                         await dodoService.optimizer.runTask(task.id)
+                        // Show toast based on result
+                        if let updatedTask = dodoService.optimizer.tasks.first(where: { $0.id == task.id }) {
+                            switch updatedTask.status {
+                            case .completed:
+                                ToastManager.shared.show(ToastData(
+                                    type: .success,
+                                    title: "Optimization complete",
+                                    message: updatedTask.benefit
+                                ))
+                            case .failed(let error):
+                                ToastManager.shared.show(ToastData(
+                                    type: .error,
+                                    title: "Optimization failed",
+                                    message: error
+                                ))
+                            default:
+                                break
+                            }
+                        }
                     }
                 }
                 taskToConfirm = nil
@@ -70,7 +89,25 @@ struct OptimizerView: View {
             Button("Cancel", role: .cancel) { }
             Button("Run all") {
                 Task {
+                    let beforeCompleted = dodoService.optimizer.completedTaskCount
+                    let beforeFailed = dodoService.optimizer.failedTaskCount
                     await dodoService.optimizer.runAllTasks()
+                    let newCompleted = dodoService.optimizer.completedTaskCount - beforeCompleted
+                    let newFailed = dodoService.optimizer.failedTaskCount - beforeFailed
+
+                    if newFailed > 0 {
+                        ToastManager.shared.show(ToastData(
+                            type: .warning,
+                            title: "Optimizations completed",
+                            message: "\(newCompleted) succeeded, \(newFailed) failed"
+                        ))
+                    } else {
+                        ToastManager.shared.show(ToastData(
+                            type: .success,
+                            title: "All optimizations complete",
+                            message: "\(newCompleted) tasks completed successfully"
+                        ))
+                    }
                 }
             }
         } message: {
@@ -87,16 +124,43 @@ struct OptimizerView: View {
 
     // MARK: - Loading View
 
-    private var loadingView: some View {
-        VStack(spacing: 16) {
-            ProgressView()
-                .scaleEffect(1.5)
+    @State private var boltOpacities: [Double] = [0.3, 0.3, 0.3]
+    @State private var boltScales: [CGFloat] = [0.8, 0.8, 0.8]
 
-            Text("Analyzing system...")
-                .font(.dodoBody)
-                .foregroundColor(.dodoTextSecondary)
+    private var loadingView: some View {
+        VStack(spacing: 24) {
+            HStack(spacing: 16) {
+                ForEach(0..<3, id: \.self) { index in
+                    Image(systemName: "bolt.fill")
+                        .font(.system(size: 32))
+                        .foregroundColor(.dodoWarning)
+                        .opacity(boltOpacities[index])
+                        .scaleEffect(boltScales[index])
+                }
+            }
+            .frame(height: 60)
+
+            VStack(spacing: 8) {
+                Text(String(localized: "optimizer.analyzing"))
+                    .font(.dodoBody)
+                    .foregroundColor(.dodoTextSecondary)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            startBoltAnimation()
+        }
+    }
+
+    private func startBoltAnimation() {
+        for index in 0..<3 {
+            let delay = Double(index) * 0.2
+
+            withAnimation(.easeInOut(duration: 0.5).delay(delay).repeatForever(autoreverses: true)) {
+                boltOpacities[index] = 1.0
+                boltScales[index] = 1.2
+            }
+        }
     }
 
     // MARK: - Error State
@@ -107,7 +171,7 @@ struct OptimizerView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.dodoDanger)
 
-            Text("Analysis failed")
+            Text(String(localized: "optimizer.analysisFailed"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
@@ -122,7 +186,7 @@ struct OptimizerView: View {
                     await dodoService.optimizer.analyzeSystem()
                 }
             } label: {
-                Text("Try again")
+                Text(String(localized: "optimizer.tryAgain"))
             }
             .buttonStyle(.dodoPrimary)
         }
@@ -137,11 +201,11 @@ struct OptimizerView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.dodoSuccess)
 
-            Text("System is optimized")
+            Text(String(localized: "optimizer.systemOptimized"))
                 .font(.dodoHeadline)
                 .foregroundColor(.dodoTextPrimary)
 
-            Text("No optimization tasks needed")
+            Text(String(localized: "optimizer.noTasksNeeded"))
                 .font(.dodoBody)
                 .foregroundColor(.dodoTextSecondary)
 
@@ -150,7 +214,7 @@ struct OptimizerView: View {
                     await dodoService.optimizer.analyzeSystem()
                 }
             } label: {
-                Text("Check again")
+                Text(String(localized: "optimizer.checkAgain"))
             }
             .buttonStyle(.dodoPrimary)
         }
@@ -192,7 +256,7 @@ struct OptimizerView: View {
                         Circle()
                             .fill(Color.dodoInfo)
                             .frame(width: 8, height: 8)
-                        Text("\(dodoService.optimizer.pendingTaskCount) pending")
+                        Text(String(localized: "optimizer.pending \(dodoService.optimizer.pendingTaskCount)"))
                             .font(.dodoCaption)
                             .foregroundColor(.dodoTextSecondary)
                     }
@@ -203,7 +267,7 @@ struct OptimizerView: View {
                         Circle()
                             .fill(Color.dodoSuccess)
                             .frame(width: 8, height: 8)
-                        Text("\(dodoService.optimizer.completedTaskCount) completed")
+                        Text(String(localized: "optimizer.completed \(dodoService.optimizer.completedTaskCount)"))
                             .font(.dodoCaption)
                             .foregroundColor(.dodoTextSecondary)
                     }
@@ -214,7 +278,7 @@ struct OptimizerView: View {
                         Circle()
                             .fill(Color.dodoDanger)
                             .frame(width: 8, height: 8)
-                        Text("\(dodoService.optimizer.failedTaskCount) failed")
+                        Text(String(localized: "optimizer.failed \(dodoService.optimizer.failedTaskCount)"))
                             .font(.dodoCaption)
                             .foregroundColor(.dodoTextSecondary)
                     }
@@ -233,7 +297,7 @@ struct OptimizerView: View {
                     } label: {
                         HStack(spacing: 6) {
                             Image(systemName: "arrow.clockwise")
-                            Text("Retry failed")
+                            Text(String(localized: "optimizer.retryFailed"))
                         }
                     }
                     .buttonStyle(.dodoSecondary)

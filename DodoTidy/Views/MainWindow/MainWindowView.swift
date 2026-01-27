@@ -13,13 +13,13 @@ enum NavigationItem: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .dashboard: return "Dashboard"
-        case .cleaner: return "Cleaner"
-        case .analyzer: return "Analyzer"
-        case .optimizer: return "Optimizer"
-        case .apps: return "Apps"
-        case .history: return "History"
-        case .scheduled: return "Scheduled"
+        case .dashboard: return String(localized: "nav.dashboard")
+        case .cleaner: return String(localized: "nav.cleaner")
+        case .analyzer: return String(localized: "nav.analyzer")
+        case .optimizer: return String(localized: "nav.optimizer")
+        case .apps: return String(localized: "nav.apps")
+        case .history: return String(localized: "nav.history")
+        case .scheduled: return String(localized: "nav.scheduled")
         }
     }
 
@@ -41,12 +41,17 @@ struct MainWindowView: View {
     @State private var dodoService = DodoTidyService.shared
 
     var body: some View {
-        NavigationSplitView {
-            SidebarView(selectedItem: $selectedItem)
-                .navigationSplitViewColumnWidth(min: 200, ideal: 220, max: 280)
-        } detail: {
-            contentView
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        ZStack {
+            NavigationSplitView {
+                SidebarView(selectedItem: $selectedItem)
+                    .navigationSplitViewColumnWidth(min: 230, ideal: 250, max: 320)
+            } detail: {
+                contentView
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+
+            // Toast notification overlay
+            ToastContainer()
         }
         .task {
             await dodoService.startMonitoring()
