@@ -11,7 +11,7 @@ final class StatusItemManager: NSObject {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "leaf.circle.fill",
+            button.image = NSImage(systemSymbolName: "wand.and.stars",
                                    accessibilityDescription: "DodoTidy")
             button.image?.isTemplate = true
             button.target = self
