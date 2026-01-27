@@ -128,9 +128,6 @@ final class AppSettings {
     var confirmBeforeCleaning: Bool {
         didSet { UserDefaults.standard.set(confirmBeforeCleaning, forKey: "confirmBeforeCleaning") }
     }
-    var moveToTrash: Bool {
-        didSet { UserDefaults.standard.set(moveToTrash, forKey: "moveToTrash") }
-    }
     var excludedPaths: [String] {
         didSet { UserDefaults.standard.set(excludedPaths, forKey: "excludedPaths") }
     }
@@ -173,7 +170,6 @@ final class AppSettings {
         self.refreshInterval = UserDefaults.standard.object(forKey: "refreshInterval") as? Int ?? 2
         self.appLanguage = (UserDefaults.standard.array(forKey: "AppleLanguages") as? [String])?.first ?? "en"
         self.confirmBeforeCleaning = UserDefaults.standard.object(forKey: "confirmBeforeCleaning") as? Bool ?? true
-        self.moveToTrash = UserDefaults.standard.object(forKey: "moveToTrash") as? Bool ?? true
         self.excludedPaths = UserDefaults.standard.object(forKey: "excludedPaths") as? [String] ?? []
         self.protectedPaths = UserDefaults.standard.object(forKey: "protectedPaths") as? [String] ?? CleanerProvider.defaultProtectedPaths
         self.minimumFileAgeDays = UserDefaults.standard.object(forKey: "minimumFileAgeDays") as? Int ?? 0
@@ -223,7 +219,6 @@ final class AppSettings {
         showMenuBarIcon = true
         refreshInterval = 2
         confirmBeforeCleaning = true
-        moveToTrash = true
         excludedPaths = []
         showHiddenFiles = false
         minFileSizeForLargeFiles = 100
@@ -311,9 +306,12 @@ struct SettingsView: View {
         Form {
             Section {
                 Toggle("Confirm before cleaning", isOn: $settings.confirmBeforeCleaning)
-                Toggle("Move to Trash instead of permanent delete", isOn: $settings.moveToTrash)
             } header: {
                 Text("Safety")
+            } footer: {
+                Text("Files are always moved to Trash and can be recovered")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
 
             Section {
