@@ -6,6 +6,7 @@ macOS için yerel bir sistem izleme, disk analizi ve temizleme uygulaması. Swif
 
 - **Kontrol Paneli**: Gerçek zamanlı sistem metrikleri (CPU, bellek, disk, pil, Bluetooth cihazları)
 - **Temizleyici**: Önbellekleri, günlükleri ve geçici dosyaları tarayın ve kaldırın
+- **Artık uygulama verileri**: Kaldırılmış uygulamalardan kalan verileri tespit edin ve temizleyin
 - **Analizci**: Etkileşimli gezinme ile görsel disk alanı analizi
 - **Optimize Edici**: Sistem optimizasyon görevleri (DNS temizleme, Spotlight sıfırlama, yazı tipi önbelleği yeniden oluşturma vb.)
 - **Uygulamalar**: Yüklü uygulamaları görüntüleyin ve ilgili dosya temizliği ile kaldırın
@@ -46,6 +47,7 @@ Korumalı yolları Ayarlar'dan özelleştirebilirsiniz.
 - **Çöp Kutusu** - Boşaltma GERİ ALINAMAZ
 - **Sistem günlükleri** - Sorun giderme için gerekli olabilir
 - **Geliştirici önbellekleri** (npm, Yarn, Homebrew, pip, CocoaPods, Gradle, Maven) - Uzun yeniden indirmeler gerektirebilir
+- **Artık uygulama verileri** - Kaldırılmış uygulamalardan kalan klasörler (dikkatli inceleme gerektirir)
 
 ### 4. Kuru çalıştırma modu
 
@@ -84,6 +86,27 @@ Optimize edici yalnızca iyi bilinen, güvenli sistem komutlarını çalıştır
 - `lsregister` - Launch Services veritabanını yeniden oluştur
 
 Yıkıcı veya riskli sistem komutları dahil değildir.
+
+### 9. Artık uygulama verisi tespiti
+
+DodoTidy, kaldırdığınız uygulamalardan kalan verileri tespit edebilir:
+
+**Taranan konumlar:**
+- `~/Library/Application Support`
+- `~/Library/Caches`
+- `~/Library/Preferences`
+- `~/Library/Containers`
+- `~/Library/Saved Application State`
+- `~/Library/Logs`
+- Ve 6 ek Library konumu
+
+**Güvenlik önlemleri:**
+- Bundle ID'leri kullanarak yüklü uygulamalarla akıllı eşleştirme
+- Tüm Apple sistem servisleri hariç tutulur (`com.apple.*`)
+- Yaygın sistem bileşenleri ve geliştirici araçları hariç tutulur
+- Öğeler varsayılan olarak seçili değildir - ne temizleneceğini açıkça seçmelisiniz
+- Temizlemeden önce agresif uyarı gösterilir
+- Tüm klasör Çöp Kutusuna taşınır (kurtarılabilir)
 
 ## Kurulum
 
