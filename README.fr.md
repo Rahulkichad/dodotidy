@@ -13,6 +13,24 @@ Une application macOS native pour la surveillance système, l'analyse de disque 
 - **Historique** : Suivre toutes les opérations de nettoyage
 - **Tâches planifiées** : Automatiser les routines de nettoyage
 
+## Comparaison avec les alternatives payantes
+
+| Fonctionnalité | **DodoTidy** | **CleanMyMac X** | **MacKeeper** | **DaisyDisk** |
+|----------------|-------------|------------------|---------------|---------------|
+| **Prix** | Gratuit (Open Source) | $39.95/an ou $89.95 unique | $71.40/an ($5.95/mois) | $9.99 unique |
+| **Surveillance système** | ✅ CPU, RAM, Disque, Batterie, Bluetooth | ✅ CPU, RAM, Disque | ✅ Surveillance mémoire | ❌ |
+| **Nettoyage cache/fichiers** | ✅ | ✅ | ✅ | ❌ |
+| **Analyseur d'espace disque** | ✅ Graphique sunburst visuel | ✅ Space Lens | ❌ | ✅ Anneaux visuels |
+| **Détection données orphelines** | ✅ | ✅ | ✅ | ❌ |
+| **Désinstallateur d'apps** | ✅ Avec fichiers associés | ✅ Avec fichiers associés | ✅ Smart Uninstaller | ❌ |
+| **Optimisation système** | ✅ DNS, Spotlight, polices, Dock | ✅ Scripts maintenance | ✅ Démarrage, RAM | ❌ |
+| **Nettoyage planifié** | ✅ | ✅ | ❌ | ❌ |
+| **Suppression vers corbeille** | ✅ Toujours récupérable | ✅ | ✅ | ✅ |
+| **Mode simulation** | ✅ | ❌ | ❌ | ❌ |
+| **Chemins protégés** | ✅ Personnalisable | ✅ | ✅ | N/A |
+| **Version macOS** | 14.0+ (Sonoma) | 10.13+ | 10.13+ | 10.13+ |
+| **Open Source** | ✅ Licence MIT | ❌ | ❌ | ❌ |
+
 ## Mesures de Sécurité
 
 DodoTidy est conçu avec plusieurs mécanismes de sécurité pour protéger vos données :

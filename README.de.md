@@ -13,6 +13,24 @@ Eine native macOS-Anwendung für Systemüberwachung, Festplattenanalyse und Bere
 - **Verlauf**: Alle Bereinigungsvorgänge verfolgen
 - **Geplante Aufgaben**: Bereinigungsroutinen automatisieren
 
+## Vergleich mit kostenpflichtigen Alternativen
+
+| Funktion | **DodoTidy** | **CleanMyMac X** | **MacKeeper** | **DaisyDisk** |
+|----------|-------------|------------------|---------------|---------------|
+| **Preis** | Kostenlos (Open Source) | $39.95/Jahr oder $89.95 einmalig | $71.40/Jahr ($5.95/Mo) | $9.99 einmalig |
+| **Systemüberwachung** | ✅ CPU, RAM, Disk, Akku, Bluetooth | ✅ CPU, RAM, Disk | ✅ Speicherüberwachung | ❌ |
+| **Cache/Junk-Bereinigung** | ✅ | ✅ | ✅ | ❌ |
+| **Speicherplatzanalyse** | ✅ Visuelles Sunburst-Diagramm | ✅ Space Lens | ❌ | ✅ Visuelle Ringe |
+| **Verwaiste App-Daten-Erkennung** | ✅ | ✅ | ✅ | ❌ |
+| **App-Deinstallation** | ✅ Mit zugehörigen Dateien | ✅ Mit zugehörigen Dateien | ✅ Smart Uninstaller | ❌ |
+| **Systemoptimierung** | ✅ DNS, Spotlight, Schriften, Dock | ✅ Wartungsskripte | ✅ Startobjekte, RAM | ❌ |
+| **Geplante Bereinigung** | ✅ | ✅ | ❌ | ❌ |
+| **Papierkorb-Löschung** | ✅ Immer wiederherstellbar | ✅ | ✅ | ✅ |
+| **Probelauf-Modus** | ✅ | ❌ | ❌ | ❌ |
+| **Geschützte Pfade** | ✅ Anpassbar | ✅ | ✅ | N/A |
+| **macOS-Version** | 14.0+ (Sonoma) | 10.13+ | 10.13+ | 10.13+ |
+| **Open Source** | ✅ MIT-Lizenz | ❌ | ❌ | ❌ |
+
 ## Sicherheitsvorkehrungen
 
 DodoTidy wurde mit mehreren Sicherheitsmechanismen zum Schutz Ihrer Daten entwickelt:

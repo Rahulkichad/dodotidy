@@ -13,6 +13,24 @@ macOS için yerel bir sistem izleme, disk analizi ve temizleme uygulaması. Swif
 - **Geçmiş**: Tüm temizleme işlemlerini takip edin
 - **Zamanlanmış görevler**: Temizlik rutinlerini otomatikleştirin
 
+## Ücretli Alternatiflerle Karşılaştırma
+
+| Özellik | **DodoTidy** | **CleanMyMac X** | **MacKeeper** | **DaisyDisk** |
+|---------|-------------|------------------|---------------|---------------|
+| **Fiyat** | Ücretsiz (Açık Kaynak) | $39.95/yıl veya $89.95 tek seferlik | $71.40/yıl ($5.95/ay) | $9.99 tek seferlik |
+| **Sistem İzleme** | ✅ CPU, RAM, Disk, Pil, Bluetooth | ✅ CPU, RAM, Disk | ✅ Bellek izleme | ❌ |
+| **Önbellek/Gereksiz Dosya Temizliği** | ✅ | ✅ | ✅ | ❌ |
+| **Disk Alanı Analizörü** | ✅ Görsel sunburst grafik | ✅ Space Lens | ❌ | ✅ Görsel halkalar |
+| **Artık Uygulama Verisi Tespiti** | ✅ | ✅ | ✅ | ❌ |
+| **Uygulama Kaldırıcı** | ✅ İlgili dosyalarla | ✅ İlgili dosyalarla | ✅ Akıllı Kaldırıcı | ❌ |
+| **Sistem Optimizasyonu** | ✅ DNS, Spotlight, yazı tipleri, Dock | ✅ Bakım betikleri | ✅ Başlangıç öğeleri, RAM | ❌ |
+| **Zamanlanmış Temizlik** | ✅ | ✅ | ❌ | ❌ |
+| **Çöp Kutusuna Taşıma** | ✅ Her zaman kurtarılabilir | ✅ | ✅ | ✅ |
+| **Kuru Çalıştırma Modu** | ✅ | ❌ | ❌ | ❌ |
+| **Korumalı Yollar** | ✅ Özelleştirilebilir | ✅ | ✅ | N/A |
+| **macOS Sürümü** | 14.0+ (Sonoma) | 10.13+ | 10.13+ | 10.13+ |
+| **Açık Kaynak** | ✅ MIT Lisansı | ❌ | ❌ | ❌ |
+
 ## Güvenlik Önlemleri
 
 DodoTidy, verilerinizi korumak için birden fazla güvenlik mekanizmasıyla tasarlanmıştır:

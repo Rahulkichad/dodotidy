@@ -24,6 +24,24 @@ https://github.com/user-attachments/assets/30fbedeb-1083-4c42-beac-9de65b2d9c6c
 - **History**: Track all cleaning operations
 - **Scheduled tasks**: Automate cleanup routines
 
+## Comparison with Paid Alternatives
+
+| Feature | **DodoTidy** | **CleanMyMac X** | **MacKeeper** | **DaisyDisk** |
+|---------|-------------|------------------|---------------|---------------|
+| **Price** | Free (Open Source) | $39.95/year or $89.95 one-time | $71.40/year ($5.95/mo) | $9.99 one-time |
+| **System Monitoring** | ✅ CPU, RAM, Disk, Battery, Bluetooth | ✅ CPU, RAM, Disk | ✅ Memory monitoring | ❌ |
+| **Cache/Junk Cleaning** | ✅ | ✅ | ✅ | ❌ |
+| **Disk Space Analyzer** | ✅ Visual sunburst chart | ✅ Space Lens | ❌ | ✅ Visual rings |
+| **Orphaned App Data Detection** | ✅ | ✅ | ✅ | ❌ |
+| **App Uninstaller** | ✅ With related files | ✅ With related files | ✅ Smart Uninstaller | ❌ |
+| **System Optimization** | ✅ DNS, Spotlight, fonts, Dock | ✅ Maintenance scripts | ✅ Startup items, RAM | ❌ |
+| **Scheduled Cleaning** | ✅ | ✅ | ❌ | ❌ |
+| **Trash-based Deletion** | ✅ Always recoverable | ✅ | ✅ | ✅ |
+| **Dry Run Mode** | ✅ | ❌ | ❌ | ❌ |
+| **Protected Paths** | ✅ Customizable | ✅ | ✅ | N/A |
+| **macOS Version** | 14.0+ (Sonoma) | 10.13+ | 10.13+ | 10.13+ |
+| **Open Source** | ✅ MIT License | ❌ | ❌ | ❌ |
+
 ## Safety Guardrails
 
 DodoTidy is designed with multiple safety mechanisms to protect your data:
