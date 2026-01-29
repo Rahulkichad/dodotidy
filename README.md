@@ -255,3 +255,7 @@ Access Settings from the app menu or sidebar to configure:
 ## License
 
 MIT License
+
+---
+
+Part of the Dodo app family ([DodoPulse](https://github.com/bluewave-labs/dodopulse), [DodoTidy](https://github.com/bluewave-labs/dodotidy), [DodoClip](https://github.com/bluewave-labs/dodoclip), [DodoNest](https://github.com/bluewave-labs/dodonest))

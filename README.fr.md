@@ -244,3 +244,7 @@ Accédez aux Réglages depuis le menu de l'application ou la barre latérale pou
 ## Licence
 
 Licence MIT
+
+---
+
+Fait partie de la famille d'applications Dodo ([DodoPulse](https://github.com/bluewave-labs/dodopulse), [DodoTidy](https://github.com/bluewave-labs/dodotidy), [DodoClip](https://github.com/bluewave-labs/dodoclip), [DodoNest](https://github.com/bluewave-labs/dodonest))

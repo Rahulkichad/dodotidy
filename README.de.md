@@ -244,3 +244,7 @@ Greifen Sie über das App-Menü oder die Seitenleiste auf die Einstellungen zu:
 ## Lizenz
 
 MIT-Lizenz
+
+---
+
+Teil der Dodo-App-Familie ([DodoPulse](https://github.com/bluewave-labs/dodopulse), [DodoTidy](https://github.com/bluewave-labs/dodotidy), [DodoClip](https://github.com/bluewave-labs/dodoclip), [DodoNest](https://github.com/bluewave-labs/dodonest))

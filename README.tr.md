@@ -244,3 +244,7 @@ Yapılandırmak için uygulama menüsünden veya kenar çubuğundan Ayarlar'a er
 ## Lisans
 
 MIT Lisansı
+
+---
+
+Dodo uygulama ailesinin bir parçası ([DodoPulse](https://github.com/bluewave-labs/dodopulse), [DodoTidy](https://github.com/bluewave-labs/dodotidy), [DodoClip](https://github.com/bluewave-labs/dodoclip), [DodoNest](https://github.com/bluewave-labs/dodonest))
