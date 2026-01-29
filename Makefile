@@ -17,13 +17,15 @@ generate-project:
 		echo "xcodegen not found. Please install it with 'brew install xcodegen'"; \
 	fi
 
-# Build with xcodebuild
+# Build with xcodebuild (Universal Binary for Intel + Apple Silicon)
 build:
-	@echo "Building $(PROJECT_NAME)..."
+	@echo "Building $(PROJECT_NAME) (Universal Binary)..."
 	xcodebuild -project $(PROJECT_NAME).xcodeproj \
 		-scheme $(SCHEME) \
 		-configuration Release \
 		-derivedDataPath $(DERIVED_DATA) \
+		ARCHS="arm64 x86_64" \
+		ONLY_ACTIVE_ARCH=NO \
 		build
 
 # Build debug

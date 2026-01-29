@@ -1,6 +1,6 @@
 cask "dodotidy" do
-  version "1.0.4"
-  sha256 "38cea8edc5eb550136c0eea8af63357e95acdf95db5d733a6ede85f43b96b9e2"
+  version "1.0.5"
+  sha256 "66c5e27f04875a519b821ee053f29b5c9321d598d57c0a94417ff29f988c5690"
 
   url "https://github.com/bluewave-labs/DodoTidy/releases/download/v#{version}/DodoTidy-#{version}.dmg"
   name "DodoTidy"

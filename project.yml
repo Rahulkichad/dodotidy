@@ -8,7 +8,7 @@ options:
 
 settings:
   base:
-    MARKETING_VERSION: "1.0.4"
+    MARKETING_VERSION: "1.0.5"
     CURRENT_PROJECT_VERSION: "1"
     DEVELOPMENT_TEAM: ""
     CODE_SIGN_IDENTITY: "-"
@@ -17,6 +17,8 @@ settings:
     INFOPLIST_KEY_LSApplicationCategoryType: "public.app-category.utilities"
     INFOPLIST_KEY_NSMainStoryboardFile: ""
     INFOPLIST_KEY_LSUIElement: NO
+    ARCHS: "arm64 x86_64"
+    ONLY_ACTIVE_ARCH: NO
 
 targets:
   DodoTidy:
