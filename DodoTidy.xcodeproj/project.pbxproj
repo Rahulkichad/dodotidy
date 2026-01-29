@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		018434C9ABE0693C397C8CF9 /* DodoTidy-1.0.2.dmg in Resources */ = {isa = PBXBuildFile; fileRef = BDAA09E39B90A4184F6026CD /* DodoTidy-1.0.2.dmg */; };
 		0684E51DEA8BEC5DA664CF0A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B3351D85D21CDB00581DE75C /* Localizable.strings */; };
 		2B73214A2C75208423928D25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED324FFAF7332F818F85022F /* AppDelegate.swift */; };
 		2DFDE5BC9E256582B10789DD /* StatusItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678DD44720EF6858921B3F6E /* StatusItemManager.swift */; };
@@ -16,6 +17,7 @@
 		5C7687C2AC78C871C25493E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A66E437ABDA62EEBF0CA42A7 /* Assets.xcassets */; };
 		6151189DB049E5B2859B5A2C /* DodoTidyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B668439CD23322980411E856 /* DodoTidyService.swift */; };
 		66C44878AC9B05EDE075F156 /* AnalyzerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF76959838BDEBD8E797691 /* AnalyzerView.swift */; };
+		6FCC237A869C877E78F721BF /* DodoTidy.app in Resources */ = {isa = PBXBuildFile; fileRef = 5DAD1D990EB75BF064FE96B1 /* DodoTidy.app */; };
 		8E27D5B99A0F32B20F114B97 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF40F686C314510C1C4F632 /* Extensions.swift */; };
 		97CAFF27EA30832E9816C8AF /* SunburstChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18402E09CC8F6AB6B5F4F6C /* SunburstChart.swift */; };
 		9C8F5F8ACD14F831248899BA /* MainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E0F27389EF29DCFE84CE7A /* MainWindowView.swift */; };
@@ -30,6 +32,7 @@
 		E0F8895DAC381FFADA4585FB /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2588DDEA11C20BBD6FB72F /* ScanResult.swift */; };
 		E5AF558C2A2E1075831428C4 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F221F71F744C6002E7A79733 /* DashboardView.swift */; };
 		E60C7225ED35A034B377240D /* DodoTidyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE42A8C23FE2A84B7EA5226 /* DodoTidyApp.swift */; };
+		E6458FCC0BD15FD7D68D31FF /* DodoTidy.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 8E302413942978785E4084F1 /* DodoTidy.dmg */; };
 		EC0AB5EBA29261BEF79943BD /* ProcessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE2E6586DABD00299462B21 /* ProcessRunner.swift */; };
 		F961ECBEC29EC20EF66DF9E8 /* ToastNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15D39442159F4DCFC87624 /* ToastNotification.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +46,7 @@
 		4446328661A1E58112F680F6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4CF76959838BDEBD8E797691 /* AnalyzerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzerView.swift; sourceTree = "<group>"; };
 		547948EA0997BFF97717D3A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5DAD1D990EB75BF064FE96B1 /* DodoTidy.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = DodoTidy.app; sourceTree = "<group>"; };
 		678DD44720EF6858921B3F6E /* StatusItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemManager.swift; sourceTree = "<group>"; };
 		6E75EA352102EAB4FEBF650B /* fr.lproj */ = {isa = PBXFileReference; path = fr.lproj; sourceTree = "<group>"; };
 		77B3C6CFD1C3627A78BF364F /* OptimizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptimizerView.swift; sourceTree = "<group>"; };
@@ -50,6 +54,7 @@
 		8AFF73ED66D2BE0FD2CB8EDC /* tr.lproj */ = {isa = PBXFileReference; path = tr.lproj; sourceTree = "<group>"; };
 		8B495D0F0B208D0DB161A9F9 /* en.lproj */ = {isa = PBXFileReference; path = en.lproj; sourceTree = "<group>"; };
 		8E15D39442159F4DCFC87624 /* ToastNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastNotification.swift; sourceTree = "<group>"; };
+		8E302413942978785E4084F1 /* DodoTidy.dmg */ = {isa = PBXFileReference; path = DodoTidy.dmg; sourceTree = "<group>"; };
 		9C2588DDEA11C20BBD6FB72F /* ScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
 		A18402E09CC8F6AB6B5F4F6C /* SunburstChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunburstChart.swift; sourceTree = "<group>"; };
 		A66E437ABDA62EEBF0CA42A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +63,7 @@
 		AE74AADEE2945CB0F8A8B13E /* CleanerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanerView.swift; sourceTree = "<group>"; };
 		B668439CD23322980411E856 /* DodoTidyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DodoTidyService.swift; sourceTree = "<group>"; };
 		BA7A49AC15FB207C550286BE /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		BDAA09E39B90A4184F6026CD /* DodoTidy-1.0.2.dmg */ = {isa = PBXFileReference; path = "DodoTidy-1.0.2.dmg"; sourceTree = "<group>"; };
 		BF6B1DCD1062828D9FA336EB /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		C45BBB32D6CA8F874DD40537 /* SparklineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SparklineChart.swift; sourceTree = "<group>"; };
 		D616498FA7311F2FAC50D3A2 /* de.lproj */ = {isa = PBXFileReference; path = de.lproj; sourceTree = "<group>"; };
@@ -107,6 +113,7 @@
 			children = (
 				637173537884FEC71A8323A5 /* App */,
 				867AAFD246F43D8D9C5BFEDC /* Models */,
+				83549A1853F5728211277419 /* release */,
 				1BB98B35296CE79B0AA2493B /* Resources */,
 				AB46BED999901780DA3BFCA6 /* Services */,
 				E75C658B9C865642B6409647 /* Utilities */,
@@ -121,6 +128,16 @@
 				EF41CB83AE5CDD4C0E4DD97C /* DodoTidy.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		83549A1853F5728211277419 /* release */ = {
+			isa = PBXGroup;
+			children = (
+				BDAA09E39B90A4184F6026CD /* DodoTidy-1.0.2.dmg */,
+				5DAD1D990EB75BF064FE96B1 /* DodoTidy.app */,
+				8E302413942978785E4084F1 /* DodoTidy.dmg */,
+			);
+			path = release;
 			sourceTree = "<group>";
 		};
 		867AAFD246F43D8D9C5BFEDC /* Models */ = {
@@ -259,6 +276,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C7687C2AC78C871C25493E4 /* Assets.xcassets in Resources */,
+				018434C9ABE0693C397C8CF9 /* DodoTidy-1.0.2.dmg in Resources */,
+				6FCC237A869C877E78F721BF /* DodoTidy.app in Resources */,
+				E6458FCC0BD15FD7D68D31FF /* DodoTidy.dmg in Resources */,
 				0684E51DEA8BEC5DA664CF0A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,7 +387,7 @@
 				INFOPLIST_KEY_LSUIElement = NO;
 				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -438,7 +458,7 @@
 				INFOPLIST_KEY_LSUIElement = NO;
 				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -456,6 +476,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DodoTidy/release/DodoTidy.app/Contents/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DodoTidy;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -474,6 +495,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DodoTidy/release/DodoTidy.app/Contents/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DodoTidy;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
