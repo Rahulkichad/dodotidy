@@ -135,14 +135,14 @@ DodoTidy kann übriggebliebene Daten von Anwendungen erkennen, die Sie deinstall
 ### Homebrew (Empfohlen)
 
 ```bash
-brew tap bluewave-labs/dodotidy
+brew tap dodoapps/tap
 brew install --cask dodotidy
 xattr -cr /Applications/DodoTidy.app
 ```
 
 ### Manuelle Installation
 
-1. Laden Sie die neueste DMG von [Releases](https://github.com/bluewave-labs/DodoTidy/releases) herunter
+1. Laden Sie die neueste DMG von [Releases](https://github.com/dodoapps/dodotidy/releases) herunter
 2. Öffnen Sie die DMG und ziehen Sie DodoTidy in den Programme-Ordner
 3. Klicken Sie beim ersten Start mit der rechten Maustaste und wählen Sie "Öffnen" (erforderlich für nicht signierte Apps)
 
@@ -247,4 +247,4 @@ MIT-Lizenz
 
 ---
 
-Teil der Dodo-App-Familie ([DodoPulse](https://github.com/bluewave-labs/dodopulse), [DodoTidy](https://github.com/bluewave-labs/dodotidy), [DodoClip](https://github.com/bluewave-labs/dodoclip), [DodoNest](https://github.com/bluewave-labs/dodonest))
+Teil der Dodo-App-Familie ([DodoPulse](https://github.com/dodoapps/dodopulse), [DodoTidy](https://github.com/dodoapps/dodotidy), [DodoClip](https://github.com/dodoapps/dodoclip), [DodoNest](https://github.com/dodoapps/dodonest))

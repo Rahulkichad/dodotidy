@@ -135,14 +135,14 @@ DodoTidy peut détecter les données résiduelles d'applications que vous avez d
 ### Homebrew (Recommandé)
 
 ```bash
-brew tap bluewave-labs/dodotidy
+brew tap dodoapps/tap
 brew install --cask dodotidy
 xattr -cr /Applications/DodoTidy.app
 ```
 
 ### Installation manuelle
 
-1. Téléchargez le dernier DMG depuis [Releases](https://github.com/bluewave-labs/DodoTidy/releases)
+1. Téléchargez le dernier DMG depuis [Releases](https://github.com/dodoapps/dodotidy/releases)
 2. Ouvrez le DMG et faites glisser DodoTidy vers Applications
 3. Faites un clic droit et sélectionnez "Ouvrir" lors du premier lancement (requis pour les applications non signées)
 
@@ -247,4 +247,4 @@ Licence MIT
 
 ---
 
-Fait partie de la famille d'applications Dodo ([DodoPulse](https://github.com/bluewave-labs/dodopulse), [DodoTidy](https://github.com/bluewave-labs/dodotidy), [DodoClip](https://github.com/bluewave-labs/dodoclip), [DodoNest](https://github.com/bluewave-labs/dodonest))
+Fait partie de la famille d'applications Dodo ([DodoPulse](https://github.com/dodoapps/dodopulse), [DodoTidy](https://github.com/dodoapps/dodotidy), [DodoClip](https://github.com/dodoapps/dodoclip), [DodoNest](https://github.com/dodoapps/dodonest))

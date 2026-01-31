@@ -146,14 +146,14 @@ DodoTidy can detect leftover data from applications you've uninstalled:
 ### Homebrew (Recommended)
 
 ```bash
-brew tap bluewave-labs/dodotidy
+brew tap dodoapps/tap
 brew install --cask dodotidy
 xattr -cr /Applications/DodoTidy.app
 ```
 
 ### Manual Installation
 
-1. Download the latest DMG from [Releases](https://github.com/bluewave-labs/DodoTidy/releases)
+1. Download the latest DMG from [Releases](https://github.com/dodoapps/dodotidy/releases)
 2. Open the DMG and drag DodoTidy to Applications
 3. Right-click and select "Open" on first launch (required for unsigned apps)
 
@@ -258,4 +258,4 @@ MIT License
 
 ---
 
-Part of the Dodo app family ([DodoPulse](https://github.com/bluewave-labs/dodopulse), [DodoTidy](https://github.com/bluewave-labs/dodotidy), [DodoClip](https://github.com/bluewave-labs/dodoclip), [DodoNest](https://github.com/bluewave-labs/dodonest))
+Part of the Dodo app family ([DodoPulse](https://github.com/dodoapps/dodopulse), [DodoTidy](https://github.com/dodoapps/dodotidy), [DodoClip](https://github.com/dodoapps/dodoclip), [DodoNest](https://github.com/dodoapps/dodonest))
