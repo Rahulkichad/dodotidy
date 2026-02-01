@@ -1602,7 +1602,7 @@ final class OptimizerProvider {
             "app.badge.checkmark",
             "Correct file associations",
             "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister",
-            ["-kill", "-r", "-domain", "local", "-domain", "system", "-domain", "user"],
+            ["-gc"],  // Use garbage collect instead of -kill (removed in macOS Tahoe)
             nil
         ),
         (
