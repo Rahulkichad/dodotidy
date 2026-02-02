@@ -19,6 +19,8 @@ Eine native macOS-Anwendung für Systemüberwachung, Festplattenanalyse und Bere
 
 ## Vergleich mit kostenpflichtigen Alternativen
 
+DodoTidy ist eine kostenlose und quelloffene Alternative zu kostenpflichtigen macOS-Systembereinigern wie CleanMyMac X, MacKeeper und DaisyDisk. Es bietet vergleichbare Funktionen ohne Abonnementgebühren oder einmalige Kaufkosten.
+
 | Funktion | **DodoTidy** | **CleanMyMac X** | **MacKeeper** | **DaisyDisk** |
 |----------|-------------|------------------|---------------|---------------|
 | **Preis** | Kostenlos (Open Source) | $39.95/Jahr oder $89.95 einmalig | $71.40/Jahr ($5.95/Mo) | $9.99 einmalig |

@@ -19,6 +19,8 @@ macOS için yerel bir sistem izleme, disk analizi ve temizleme uygulaması. Swif
 
 ## Ücretli Alternatiflerle Karşılaştırma
 
+DodoTidy, CleanMyMac X, MacKeeper ve DaisyDisk gibi ücretli macOS sistem temizleyicilerine ücretsiz ve açık kaynaklı bir alternatiftir. Abonelik ücretleri veya tek seferlik satın alma maliyetleri olmadan benzer özellikler sunar.
+
 | Özellik | **DodoTidy** | **CleanMyMac X** | **MacKeeper** | **DaisyDisk** |
 |---------|-------------|------------------|---------------|---------------|
 | **Fiyat** | Ücretsiz (Açık Kaynak) | $39.95/yıl veya $89.95 tek seferlik | $71.40/yıl ($5.95/ay) | $9.99 tek seferlik |

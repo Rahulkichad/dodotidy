@@ -30,6 +30,8 @@ https://github.com/user-attachments/assets/30fbedeb-1083-4c42-beac-9de65b2d9c6c
 
 ## Comparison with Paid Alternatives
 
+DodoTidy is a free and open-source alternative to paid macOS system cleaners like CleanMyMac X, MacKeeper, and DaisyDisk. It offers comparable features without the subscription fees or one-time purchase costs.
+
 | Feature | **DodoTidy** | **CleanMyMac X** | **MacKeeper** | **DaisyDisk** |
 |---------|-------------|------------------|---------------|---------------|
 | **Price** | Free (Open Source) | $39.95/year or $89.95 one-time | $71.40/year ($5.95/mo) | $9.99 one-time |
